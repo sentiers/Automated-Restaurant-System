@@ -17,7 +17,7 @@ var url =
 mongoose
   .connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log('MongoDB 연결...'))
   .catch((err) => console.log(err));
@@ -25,10 +25,12 @@ mongoose
 //==== ROUTES ================================================
 var root = require(__dirname + '/app/routes/root');
 var employeepage = require(__dirname + '/app/routes/employeepage');
+var menupage = require(__dirname + '/app/routes/menupage');
 
 //==== ROUTING ===============================================
 app.use('/', root);
 app.use('/employeepage', employeepage);
+app.use('/menupage', menupage);
 
 //==== LISTEN TO THE SERVER =================================
 app.listen(process.env.PORT || 8080, () =>
