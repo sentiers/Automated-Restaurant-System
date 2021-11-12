@@ -24,12 +24,14 @@ mongoose
 
 //==== ROUTES ================================================
 var root = require(__dirname + "/app/routes/root");
+var login = require(__dirname + "/app/routes/login");
 var employeepage = require(__dirname + "/app/routes/employeepage");
 var menupage = require(__dirname + "/app/routes/menupage");
 var orderpage = require(__dirname + "/app/routes/orderpage");
 
 //==== ROUTING ===============================================
 app.use("/", root);
+app.use("/login", login);
 app.use("/employeepage", employeepage);
 app.use("/menupage", menupage);
 app.use("/orderpage", orderpage);
