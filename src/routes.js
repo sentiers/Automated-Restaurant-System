@@ -16,6 +16,7 @@ import Tong from "./views/Tong";
 import Jumun from "./views/Jumun";
 import Wol from "./views/Wol";
 import Menu from "./views/Menu";
+import MenuManagement from "./views/MenuManagement"
 
 export default [
   {
@@ -48,6 +49,10 @@ export default [
     path: "/Menu",
     layout: DefaultLayout,
     component: Menu
+  },{
+    path: "/MenuManagement",
+    layout: DefaultLayout,
+    component: MenuManagement
   },
   {
     path: "/user-profile-lite",
