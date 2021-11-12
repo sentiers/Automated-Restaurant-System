@@ -1,0 +1,61 @@
+{
+  "name": "iltorb",
+  "version": "1.3.10",
+  "description": "Brotli compression/decompression with native bindings",
+  "homepage": "https://github.com/MayhemYDG/iltorb",
+  "bugs": "https://github.com/MayhemYDG/iltorb/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MayhemYDG/iltorb.git"
+  },
+  "main": "index.js",
+  "keywords": [
+    "brotli",
+    "compression",
+    "decompression"
+  ],
+  "contributors": [
+    {
+      "name": "Nicolas Stepien",
+      "email": "stepien.nicolas@gmail.com"
+    },
+    {
+      "name": "Hung Tran",
+      "email": "oohnoitz@gmail.com"
+    }
+  ],
+  "files": [
+    "brotli/common",
+    "brotli/dec",
+    "brotli/enc",
+    "brotli/include",
+    "src",
+    "binding.gyp",
+    "index.js"
+  ],
+  "dependencies": {
+    "detect-libc": "^0.2.0",
+    "nan": "^2.6.2",
+    "node-gyp": "^3.6.2",
+    "prebuild-install": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "prebuild": "^6.2.2",
+    "prebuild-ci": "^2.2.3"
+  },
+  "scripts": {
+    "install": "detect-libc prebuild-install || node-gyp rebuild",
+    "rebuild": "prebuild --compile",
+    "prebuild-ci": "prebuild-ci",
+    "test": "mocha"
+  },
+  "binary": {
+    "module_name": "iltorb",
+    "module_path": "./build/bindings",
+    "remote_path": "v{version}",
+    "host": "https://github.com/MayhemYDG/iltorb/releases/download/"
+  },
+  "license": "MIT"
+}
