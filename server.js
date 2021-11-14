@@ -12,6 +12,9 @@ var mongoose = require('mongoose');
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, '/app/views'))
+app.set('view engine', 'ejs');
+
 
 //==== 몽고디비 연결 ==================================
 var url =

@@ -1,7 +1,8 @@
 // --------------------------------------------------------
 var router = require('express').Router();
+var express = require('express');
 var Employee = require('../models/employee');
-var path = require('path');
+router.use(express.static('./app'));
 // --------------------------------------------------------
 
 //==== 모든 직원 가져오기 =========================
@@ -9,7 +10,7 @@ function getAllEmployee() {
     return new Promise(function (resolve, reject) {
         Employee.find()
             .then(data => {
-                resolve([200, data]);
+                resolve(data);
             }).catch((err) => {
                 reject(500);
             });
@@ -30,45 +31,78 @@ function createEmployee(data) {
     });
 };
 
-//==== 직원 id 별로 조회 함수 =========================
-function getEmployeeById(idData) {
+//==== 직원 생성하는 함수 =========================
+function updateEmployee(data, idData) {
     return new Promise(function (resolve, reject) {
-        Employee.findOne({
-            _id: idData
-        }).then(data => {
-            resolve([200, data]);
+        Employee.updateOne(
+            { _id: idData },
+            {
+                $set: {
+                    employee_name: data.employee_name,
+                    employee_position: data.employee_position,
+                    employee_contact: data.employee_contact
+                }
+            }
+        ).then(() => {
+            resolve(200);
         }).catch((err) => { // 직원을 찾을수없을때
             reject(404);
         });
     });
 };
 
+//==== 직원 id 별로 조회 함수 =========================
+function getEmployeeById(idData) {
+    return new Promise(function (resolve, reject) {
+        Employee.findOne({
+            _id: idData
+        }).then(data => {
+            resolve(data);
+        }).catch((err) => { // 직원을 찾을수없을때
+            reject(404);
+        });
+    });
+};
+
+//==== 직원 id 별로 조회 함수 =========================
+function removeEmployee(idData) {
+    return new Promise(function (resolve, reject) {
+        Employee.deleteOne({
+            _id: idData
+        }).then(() => {
+            resolve(200);
+        }).catch((err) => { // 직원을 찾을수없을때
+            reject(404);
+        });
+    });
+};
+
+
 // ----------------------------------------------------------------
 
 
 //==== 전체 직원조회 =============================
 router.get('/', function (req, res, next) {
-    res.sendFile(path.join(__dirname, "../views/employee.html"));
+    getAllEmployee()
+        .then((data) => {
+            res.render('employee', { datas: data });
+        }).catch((errcode) => {
+            console.log("err");
+        });
 });
 
 
-// //==== 전체 직원조회 =============================
-// router.get('/', function (req, res, next) {
-//     getAllEmployee()
-//         .then((data) => {
-//             res.status(data[0]).send(data[1]);
-//         }).catch((errcode) => {
-//             res.status(errcode).send(errcode + ": 실패");
-//         });
-// });
-
 //==== 직원 생성 =============================
+router.get('/create', function (req, res, next) {
+    res.render('employee_create');
+});
+
 router.post('/create', function (req, res, next) {
     createEmployee(req.body)
-        .then((code) => {
-            res.status(code).send(code + ": 성공");
+        .then(() => {
+            res.redirect('/employeepage');
         }).catch((errcode) => {
-            res.status(errcode).send(errcode + ": 실패");
+            console.log(errcode);
         });
 });
 
@@ -76,9 +110,31 @@ router.post('/create', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     getEmployeeById(req.params.id)
         .then((data) => {
-            res.status(data[0]).send(data[1]);
+            res.render('employee_view', data);
         }).catch((errcode) => {
-            res.status(errcode).send(errcode + ": 실패");
+            console.log(errcode);
+        });
+});
+
+
+//==== 직원 수정 =============================
+router.post('/update/:id', function (req, res, next) {
+    console.log(req.body);
+    updateEmployee(req.body, req.params.id)
+        .then(() => {
+            res.redirect('/employeepage');
+        }).catch((errcode) => {
+            console.log(errcode);
+        });
+});
+
+//==== 직원 삭제 =============================
+router.get('/remove/:id', function (req, res, next) {
+    removeEmployee(req.params.id)
+        .then(() => {
+            res.redirect('/employeepage');
+        }).catch((errcode) => {
+            console.log(errcode);
         });
 });
 

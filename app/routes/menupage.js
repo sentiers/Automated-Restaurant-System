@@ -57,17 +57,6 @@ router.get('/', function (req, res, next) {
 });
 
 
-// //==== 전체 메뉴조회 =============================
-// router.get('/', function (req, res, next) {
-//   getAllMenu()
-//     .then((data) => {
-//       res.status(data[0]).send(data[1]);
-//     })
-//     .catch((errcode) => {
-//       res.status(errcode).send(errcode + ': 실패');
-//     });
-// });
-
 //==== 메뉴 생성 =============================
 router.post('/create', function (req, res, next) {
   createMenu(req.body)
