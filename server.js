@@ -27,6 +27,8 @@ mongoose
 
 //==== ROUTES ================================================
 var root = require(__dirname + '/app/routes/root');
+var login = require(__dirname + "/app/routes/login");
+var admin = require(__dirname + "/app/routes/adminpage");
 var employeepage = require(__dirname + '/app/routes/employeepage');
 var menupage = require(__dirname + '/app/routes/menupage');
 var stockpage = require(__dirname + '/app/routes/stockpage');
@@ -34,6 +36,8 @@ var salespage = require(__dirname + '/app/routes/salespage');
 
 //==== ROUTING ===============================================
 app.use('/', root);
+app.use("/login", login);
+app.use("/admin", admin);
 app.use('/employeepage', employeepage);
 app.use('/menupage', menupage);
 app.use('/stockpage', stockpage);
