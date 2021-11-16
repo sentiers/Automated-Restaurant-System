@@ -24,8 +24,8 @@
 
 <body>
   <script type="text/javascript">
-    function goWol(){
-      location.href="/sales_wol";
+    function goTong(){
+      location.href="/salespage";
     }
     function goMenu(){
       location.href="/sales_menu";
@@ -107,7 +107,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">매출관리</h3>
+                  <h3 class="font-weight-bold">매출관리></h3>
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@
             <div class="col-md-4 stretch-card grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">전체 통계 내역</p>
+                  <p class="card-title mb-0">월별 통계 내역</p>
                   <div class="table-responsive">
                     <table class="table table-borderless">
                       <thead>
@@ -136,19 +136,19 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="pl-0">총 매출</td>
+                          <td class="pl-0">2021년 7월</td>
                           <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">오늘 매출</td>
+                          <td class="pl-0">2021년 8월</td>
                           <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">이번 주 매출</td>
+                          <td class="pl-0">2021년 9월</td>
                           <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">이번 달 매출</td>
+                          <td class="pl-0">2021년 10월</td>
                           <td class="text-muted">100,000</td>
                         </tr>
                       </tbody>
@@ -160,10 +160,10 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">전체 통계 그래프</p>
+                  <p class="card-title">월별 통계 그래프</p>
                   <div class="charts-data">
                     <div class="mt-3">
-                      <p class="mb-0">총 매출</p>
+                      <p class="mb-0">2021년 7월</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="progress progress-md flex-grow-1 mr-4">                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -171,7 +171,7 @@
                         </div>
                       </div>
                       <div class="mt-3">
-                        <p class="mb-0">오늘 매출</p>
+                        <p class="mb-0">2021년 8월</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
@@ -180,7 +180,7 @@
                       </div>
                     </div>
                     <div class="mt-3">
-                      <p class="mb-0">이번 주 매출</p>
+                      <p class="mb-0">2021년 9월</p>
                       <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
@@ -189,7 +189,7 @@
                         </div>
                       </div>
                       <div class="mt-3">
-                        <p class="mb-0">이번 달 매출</p>
+                        <p class="mb-0">2021년 10월</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -205,8 +205,8 @@
           <div class="row">
             <div class="col-md-4 stretch-card grid-margin">
               <div class="template-demo">
-                <button type="button" class="btn btn-secondary">전체 조회</button>
-                <button type="button" class="btn btn-primary" onClick="goWol()">월별 조회</button>
+                <button type="button" class="btn btn-primary" onClick="goTong()">전체 조회</button>
+                <button type="button" class="btn btn-secondary">월별 조회</button>
                 <button type="button" class="btn btn-primary" onClick="goMenu()">메뉴별 조회</button>
               </div>
             </div>
