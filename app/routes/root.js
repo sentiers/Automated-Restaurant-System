@@ -1,15 +1,33 @@
 // --------------------------------------------------------
 var router = require('express').Router();
-var path = require('path');
+var express = require('express');
+var Menu = require('../models/menu');
+router.use(express.static('./app'));
 // --------------------------------------------------------
-
+//==== 모든 메뉴 가져오기 =========================
+function getAllMenu() {
+    return new Promise(function (resolve, reject) {
+      Menu.find()
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(500);
+        });
+    });
+};
 //==== 메인 =============================
 router.get('/', function (req, res, next) {
     res.redirect("/main");
 });
 
 router.get('/main', function (req, res, next) {
-    res.sendFile(path.join(__dirname, "../views/main.html"));
+    getAllMenu()
+        .then((data) => {
+            res.render('main', { datas: data });
+        }).catch((errcode) => {
+            console.log("err");
+        });
 });
 // --------------------------------------------------------
 module.exports = router;

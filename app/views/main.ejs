@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -82,94 +81,68 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">주문관리</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span
-                      class="text-primary">3 unread alerts!</span></h6>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card tale-bg">
-                <div class="card-people mt-auto">
-                  <img src="images/dashboard/people.svg" alt="people">
-                  <div class="weather-info">
-                    <div class="d-flex">
-                      <div>
-                        <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                  <div class="row">
+                    <div class="col-md-7 grid-margin transparent">
+                      <div class="card">
+                        <div class="card-body">
+                          <p class="card-title">주문등록</p>
+                          <div class="row">
+                            <% var i =0; %>
+                            <% datas.forEach(function(data) { %>
+                              <% data.num = 0; %>
+                            <div class="col-md-3 mb-4 stretch-card transparent">
+                              <div class="card card-tale" onclick="menuclick(data.num)">
+                                <div class="card-body">
+                                  <p class="mb-4"><%=data.menu_name%></p>
+                                  <p><%=data.menu_img%></p>
+                                  <p><%=data.menu_price%></p>
+                                </div>
+                              </div>
+                            </div>
+                            <% }) %>
+                          </div>
+                        </div>
                       </div>
-                      <div class="ml-2">
-                        <h4 class="location font-weight-normal">Bangalore</h4>
-                        <h6 class="font-weight-normal">India</h6>
+                      <div class="card">
+                        <div class="card-body">
+                        <h3>메뉴1 X2</h3>
+                        <h3>메뉴2 X1</h3>
+                        <div id="result">0</div>
+                        <h3>Total:</h3>
+                        <button type="button" class="btn btn-primary float-right">완료</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 grid-margin transparent">
-              <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-tale">
-                    <div class="card-body">
-                      <p class="mb-4">Today’s Bookings</p>
-                      <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Total Bookings</p>
-                      <p class="fs-30 mb-2">61344</p>
-                      <p>22.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Number of Meetings</p>
-                      <p class="fs-30 mb-2">34040</p>
-                      <p>2.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card card-light-danger">
-                    <div class="card-body">
-                      <p class="mb-4">Number of Clients</p>
-                      <p class="fs-30 mb-2">47033</p>
-                      <p>0.22% (30 days)</p>
+                    <div class="col-md-5 grid-margin transparent">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="card-title">주문내역
+                            <button type="button" class="btn btn-secondary">대기열</button>
+                            <button type="button" class="btn btn-primary">완료</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 mb-4 stretch-card transparent">
+                            <div class="card card-tale">
+                              <div class="card-body">
+                                <p class="mb-4">내역1</p>
+                                <p class="fs-30 mb-2">목록</p>
+                                <p>가격</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. Premium <a
-                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.
-              All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a
-                href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
-          </div>
-        </footer>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -177,7 +150,11 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
+  <script>function menuclick(num) {
+    num = num+1;  
+    result = documeent.getElementById("result");
+    result.innerText = "asdf";
+  } </script>
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -200,5 +177,4 @@
   <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 </body>
-
 </html>
