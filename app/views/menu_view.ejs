@@ -96,7 +96,7 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <form class="forms-sample">
+                  
                     <!--
                     <div class="form-group">
                       <label for="name">ID</label>
@@ -108,25 +108,25 @@
                     <form class="forms-sample2" method="post" action="/menupage/update/<%= _id %>">
                       <div class="form-group">
                         <label for="name">메뉴 이름</label>
-                        <input type="text" class="form-control" name="menu_name" placeholder="<%= menu_name %>">
+                        <input type="text" class="form-control" name="menu_name" value="<%= menu_name %>">
                       </div>
                       <div class="form-group">
                         <label for="position">가격</label>
-                        <input type="text" class="form-control" name="menu_price" placeholder="<%= menu_price %>">
+                        <input type="text" class="form-control" name="menu_price" value="<%= menu_price %>">
                       </div>
                       <div class="form-group">
                         <label for="contact">칼로리</label>
-                        <input type="text" class="form-control" name="menu_calorie" placeholder="<%= menu_calorie %>">
+                        <input type="text" class="form-control" name="menu_calorie" value="<%= menu_calorie %>">
                       </div>
                       <div class="form-group">
                         <label for="contact">정보</label>
-                        <input type="text" class="form-control" name="menu_info" placeholder="<%= menu_info %>">
+                        <input type="text" class="form-control" name="menu_info" value="<%= menu_info %>">
                       </div>
                       <div class="form-group">
                         <label for="contact">이미지</label>
                         <input type="file" class="form-control" name="menu_img" >
                       </div>
-                      <button type="submit" class="btn btn-primary" onclick="location.href='/menupage/update/<%= _id %>'">메뉴 정보 수정</button>
+                      <button type="submit" class="btn btn-primary">메뉴 정보 수정</button>
                     </form>
                     <br>
                     <div>
