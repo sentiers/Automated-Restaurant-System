@@ -23,17 +23,6 @@
 </head>
 
 <body>
-  <script type="text/javascript">
-    function goWol(){
-      location.href="/sales_wol";
-    }
-    function goMenu(){
-      location.href="/sales_menu";
-    }
-    function goTong(){
-      location.href="/salespage";
-    }
-  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -116,67 +105,98 @@
           <div class="row">
             <div class="col-md-4 stretch-card grid-margin">
               <div class="template-demo">
-                <button type="button" class="btn btn-primary" onClick="goTong()"">통계 조회</button>
-                <button type="button" class="btn btn-secondary">주문 조회</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='/salespage'">통계 조회</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/salespage/jumun'">주문 조회</button>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 grid-margin">
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search by..." aria-label="Search by">
-                    <div class="input-group-append">
-                      <button class="btn btn-sm btn-primary" type="button">Search</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-4 stretch-card grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">전체 주문 내역</p>
+                  <p class="card-title mb-0">월별 통계 내역</p>
                   <div class="table-responsive">
                     <table class="table table-borderless">
                       <thead>
                         <tr>
-                          <th class="pl-0  pb-2 border-bottom">주문 번호</th>
-                          <th class="border-bottom pb-2">주문 메뉴</th>
+                          <th class="pl-0  pb-2 border-bottom">종류</th>
                           <th class="border-bottom pb-2">금액</th>
-                          <th class="border-bottom pb-2">주문 시간</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
+                          <td class="pl-0">2021년 7월</td>
+                          <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
+                          <td class="pl-0">2021년 8월</td>
+                          <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
+                          <td class="pl-0">2021년 9월</td>
+                          <td class="text-muted">100,000</td>
                         </tr>
                         <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
+                          <td class="pl-0">2021년 10월</td>
+                          <td class="text-muted">100,000</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">월별 통계 그래프</p>
+                  <div class="charts-data">
+                    <div class="mt-3">
+                      <p class="mb-0">2021년 7월</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="progress progress-md flex-grow-1 mr-4">                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                          <p class="mb-0">5k</p>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <p class="mb-0">2021년 8월</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="progress progress-md flex-grow-1 mr-4">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        <p class="mb-0">1k</p>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <p class="mb-0">2021년 9월</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="progress progress-md flex-grow-1 mr-4">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                           <p class="mb-0">992</p>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <p class="mb-0">2021년 10월</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="progress progress-md flex-grow-1 mr-4">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mb-0">687</p>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="template-demo">
+                <button type="button" class="btn btn-primary" onclick="location.href='/salespage'">전체 조회</button>
+                <button type="button" class="btn btn-secondary"onclick="location.href='/salespage/wol'">월별 조회</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/salespage/menu'">메뉴별 조회</button>
               </div>
             </div>
           </div>
