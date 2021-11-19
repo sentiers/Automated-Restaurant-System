@@ -119,7 +119,6 @@ router.get('/:id', function (req, res, next) {
 
 //==== 직원 수정 =============================
 router.post('/update/:id', function (req, res, next) {
-    console.log(req.body);
     updateEmployee(req.body, req.params.id)
         .then(() => {
             res.redirect('/employeepage');

@@ -98,37 +98,34 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <form class="forms-sample">
+                  <div class="form-group">
+                    <label for="name">ID</label>
+                    <p>
+                      <%= _id %>
+                    </p>
+                  </div>
+                  <form class="forms-sample2" method="post" action="/employeepage/update/<%= _id %>">
                     <div class="form-group">
-                      <label for="name">ID</label>
-                      <p>
-                        <%= _id %>
-                      </p>
+                      <label for="name">직원 이름</label>
+                      <input type="text" class="form-control" name="employee_name" value="<%= employee_name %>">
                     </div>
-                    <form class="forms-sample2" method="post" action="/employeepage/update/<%= _id %>">
-                      <div class="form-group">
-                        <label for="name">직원 이름</label>
-                        <input type="text" class="form-control" name="employee_name" placeholder="<%= employee_name %>">
-                      </div>
-                      <div class="form-group">
-                        <label for="position">직급</label>
-                        <input type="text" class="form-control" name="employee_position"
-                          placeholder="<%= employee_position %>">
-                      </div>
-                      <div class="form-group">
-                        <label for="contact">전화번호</label>
-                        <input type="text" class="form-control" name="employee_contact"
-                          placeholder="<%= employee_contact %>">
-                      </div>
-                      <button type="submit" class="btn btn-primary">직원정보 수정</button>
-                    </form>
-                    <br>
-                    <div>
-                      <button class="btn btn-danger" onclick="location.href='/employeepage/remove/<%= _id %>'">직원정보
-                        삭제</button>
-                      <button class="btn btn-light" style="margin: 0;position: absolute;bottom: 5%;right: 10%;"
-                        onclick="location.href='/employeepage'">뒤로</button>
+                    <div class="form-group">
+                      <label for="position">직급</label>
+                      <input type="text" class="form-control" name="employee_position" value="<%= employee_position %>">
                     </div>
+                    <div class="form-group">
+                      <label for="contact">전화번호</label>
+                      <input type="text" class="form-control" name="employee_contact" value="<%= employee_contact %>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">직원정보 수정</button>
+                  </form>
+                  <br>
+                  <div>
+                    <button class="btn btn-danger" onclick="location.href='/employeepage/remove/<%= _id %>'">직원정보
+                      삭제</button>
+                    <button class="btn btn-light" style="margin: 0;position: absolute;bottom: 5%;right: 10%;"
+                      onclick="location.href='/employeepage'">뒤로</button>
+                  </div>
                 </div>
 
               </div>
