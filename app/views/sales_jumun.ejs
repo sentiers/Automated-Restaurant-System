@@ -46,16 +46,10 @@
         <ul class="nav">
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
+            <a class="nav-link" href="/salespage">
+              <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">매출관리</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/salespage">매출통계</a></li>
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
@@ -111,7 +105,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 grid-margin">
+            <div class="col-lg-12 grid-margin">
               <div class="form-group">
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search by..." aria-label="Search by">
@@ -123,52 +117,68 @@
               </div>
           </div>
           <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">전체 주문 내역</p>
                   <div class="table-responsive">
-                    <table class="table table-borderless">
+                    <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th class="pl-0  pb-2 border-bottom">주문 번호</th>
-                          <th class="border-bottom pb-2">주문 메뉴</th>
-                          <th class="border-bottom pb-2">금액</th>
-                          <th class="border-bottom pb-2">주문 시간</th>
+                          <th>
+                            주문 번호
+                          </th>
+                          <th>
+                            주문 메뉴
+                          </th>
+                          <th>
+                            금액
+                          </th>
+                          <th>
+                            주문 시간
+                          </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
-                        </tr>
-                        <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
-                        </tr>
-                        <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
-                        </tr>
-                        <tr>
-                          <td class="pl-0">123456789</td>
-                          <td class="text-muted">음료 2</td>
-                          <td class="text-muted">4,000</td>
-                          <td class="text-muted">2021-10-29 10:00:00</td>
-                        </tr>
-                      </tbody>
+                      <% datas.forEach(function(data) { %>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <%= data._id %><% var name; %>
+                            </td>
+                            <td>
+                              <% data.order_list.forEach(function(order) { %>
+                                <% menus.forEach(function(menu) { %>
+                                  <% if(menu._id==order.menu) name = menu.menu_name; %>
+                                  <% if(menu._id!=order.menu) name = "알수없음"; %>
+                                <% }) %>
+                                (<%= name %>, <%= order.quantity %>개)
+                              <% }) %>
+                            </td>
+                            <td>
+                              <%= data.order_price %>
+                            </td>
+                            <td>
+                              <%= data.order_time.getFullYear() %>-
+                              <%= ('0' + (data.order_time.getMonth()+1)).slice(-2) %>-
+                              <%= ('0' + data.order_time.getDate()).slice(-2) %> /
+                              <%= ('0' + data.order_time.getHours()).slice(-2) %>:
+                              <%= ('0' + data.order_time.getMinutes()).slice(-2) %>:
+                              <%= ('0' + data.order_time.getSeconds()).slice(-2) %>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <% }) %>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
+
+
           </div>
+          
         </div>
       </div>
     </div>

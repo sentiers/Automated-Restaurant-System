@@ -46,16 +46,10 @@
         <ul class="nav">
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
+            <a class="nav-link" href="/salespage">
+              <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">매출관리</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/salespage">매출통계</a></li>
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
@@ -123,23 +117,19 @@
                           <th class="border-bottom pb-2">금액</th>
                         </tr>
                       </thead>
+                      <% var howmonth = 4; %>
+                      <% var month_price = []; %>
+                      <% for(var i = 0; i<howmonth; i++) { month_price[i] = 0; } %>
+                      <% datas.forEach(function(data) { %>
+                        <% month_price[data.order_time.getMonth()-new Date().getMonth()] += data.order_price; %>
+                      <% }) %>
                       <tbody>
+                        <% for(var i = 0; i<howmonth; i++) { %>
                         <tr>
-                          <td class="pl-0">2021년 7월</td>
-                          <td class="text-muted">100,000</td>
+                          <td class="pl-0"><%= new Date().getFullYear() %>년 <%= new Date().getMonth() + 1 - i %>월</td>
+                          <td class="text-muted"><%= month_price[i] %></td>
                         </tr>
-                        <tr>
-                          <td class="pl-0">2021년 8월</td>
-                          <td class="text-muted">100,000</td>
-                        </tr>
-                        <tr>
-                          <td class="pl-0">2021년 9월</td>
-                          <td class="text-muted">100,000</td>
-                        </tr>
-                        <tr>
-                          <td class="pl-0">2021년 10월</td>
-                          <td class="text-muted">100,000</td>
-                        </tr>
+                        <% } %>
                       </tbody>
                     </table>
                   </div>
@@ -151,41 +141,19 @@
                 <div class="card-body">
                   <p class="card-title">월별 통계 그래프</p>
                   <div class="charts-data">
+
+                    <% for(var i = 0; i<howmonth; i++) { %>
                     <div class="mt-3">
-                      <p class="mb-0">2021년 7월</p>
+                      <p class="mb-0"><%= new Date().getFullYear() %>년 <%= new Date().getMonth() + 1 - i %>월</p>
                       <div class="d-flex justify-content-between align-items-center">
-                        <div class="progress progress-md flex-grow-1 mr-4">                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress progress-md flex-grow-1 mr-4">                            
+                          <div class="progress-bar bg-inf0" role="progressbar" style="width: <%= month_price[i]/100 %>%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                          <p class="mb-0">5k</p>
-                        </div>
+                          <p class="mb-0"><%= month_price[i] %></p>
                       </div>
-                      <div class="mt-3">
-                        <p class="mb-0">2021년 8월</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        <p class="mb-0">1k</p>
-                      </div>
-                    </div>
-                    <div class="mt-3">
-                      <p class="mb-0">2021년 9월</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                           <p class="mb-0">992</p>
-                        </div>
-                      </div>
-                      <div class="mt-3">
-                        <p class="mb-0">2021년 10월</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mb-0">687</p>
-                      </div>  
-                    </div>
+                    </div>  
+                    <% } %>
+
                   </div>
                 </div>
               </div>

@@ -123,22 +123,32 @@
                           <th class="border-bottom pb-2">금액</th>
                         </tr>
                       </thead>
+                      <% var total_price = 0; %>
+                      <% var today_price = 0; %>
+                      <% var week_price = 0; %>
+                      <% var month_price = 0; %>
+                      <% datas.forEach(function(data) { %>
+                        <% total_price += data.order_price %>
+                        <% if(data.order_time.getDate() == new Date().getDate()) today_price += data.order_price %>
+                        <% if(data.order_time.getDate() >= new Date().getDate()-7) week_price += data.order_price %>
+                        <% if(data.order_time.getMonth() == new Date().getMonth()) month_price += data.order_price %>
+                      <% }) %>
                       <tbody>
                         <tr>
                           <td class="pl-0">총 매출</td>
-                          <td class="text-muted">100,000</td>
+                          <td class="text-muted"><%= total_price %></td>
                         </tr>
                         <tr>
                           <td class="pl-0">오늘 매출</td>
-                          <td class="text-muted">100,000</td>
+                          <td class="text-muted"><%= today_price %></td>
                         </tr>
                         <tr>
                           <td class="pl-0">이번 주 매출</td>
-                          <td class="text-muted">100,000</td>
+                          <td class="text-muted"><%= week_price %></td>
                         </tr>
                         <tr>
                           <td class="pl-0">이번 달 매출</td>
-                          <td class="text-muted">100,000</td>
+                          <td class="text-muted"><%= month_price %></td>
                         </tr>
                       </tbody>
                     </table>
@@ -154,36 +164,37 @@
                     <div class="mt-3">
                       <p class="mb-0">총 매출</p>
                       <div class="d-flex justify-content-between align-items-center">
-                        <div class="progress progress-md flex-grow-1 mr-4">                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress progress-md flex-grow-1 mr-4">                            
+                          <div class="progress-bar bg-inf0" role="progressbar" style="width: <%= total_price/100 %>%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                          <p class="mb-0">5k</p>
+                          <p class="mb-0"><%= total_price %></p>
                         </div>
                       </div>
                       <div class="mt-3">
                         <p class="mb-0">오늘 매출</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: <%= today_price/100 %>%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
-                        <p class="mb-0">1k</p>
+                        <p class="mb-0"><%= today_price %></p>
                       </div>
                     </div>
                     <div class="mt-3">
                       <p class="mb-0">이번 주 매출</p>
                       <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: <%= week_price/100 %>%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
-                           <p class="mb-0">992</p>
+                           <p class="mb-0"><%= week_price %></p>
                         </div>
                       </div>
                       <div class="mt-3">
                         <p class="mb-0">이번 달 매출</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="progress progress-md flex-grow-1 mr-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: <%= month_price/100 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="mb-0">687</p>
+                        <p class="mb-0"><%= month_price %></p>
                       </div>  
                     </div>
                   </div>
