@@ -44,13 +44,10 @@ function updateMenu(data, idData) {
       {
         $set: {
           stock_name: data.stock_name,
-          stock_order: {
-            order_company: data.stock_order.order_company,
-            order_unit: data.stock_order.order_unit,
-            order_price: data.stock_order.order_price,
-            order_phone: data.stock_order.order_phone,
-          },
-          stock_img: data.stock_img,
+          'stock_order.order_company': data.order_company,
+          'stock_order.order_unit': data.order_unit,
+          'stock_order.order_price]': data.order_price,
+          'stock_order.order_phone': data.order_phone,
         },
       }
     )
