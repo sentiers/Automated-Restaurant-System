@@ -88,14 +88,14 @@
                           <p class="card-title">주문등록</p>
                           <div class="row">
                             <% var i =0; %>
-                            <% datas.forEach(function(data) { %>
-                              <% data.num = 0; %>
+                            <% Menudatas.forEach(function(data) { %>
                             <div class="col-md-3 mb-4 stretch-card transparent">
-                              <div class="card card-tale" onclick="menuclick(data.num)">
+                              <div class="card card-tale" onclick="menuclick('<%=data.menu_name%>', <%=i%>, <%=data.menu_price%>);">
+                                <%i++;%>
                                 <div class="card-body">
                                   <p class="mb-4"><%=data.menu_name%></p>
                                   <p><%=data.menu_img%></p>
-                                  <p><%=data.menu_price%></p>
+                                  <p><%=data.menu_price%>원</p>
                                 </div>
                               </div>
                             </div>
@@ -105,10 +105,8 @@
                       </div>
                       <div class="card">
                         <div class="card-body">
-                        <h3>메뉴1 X2</h3>
-                        <h3>메뉴2 X1</h3>
-                        <div id="result">0</div>
-                        <h3>Total:</h3>
+                        <div id="list"></div>
+                        <h3>Total: <span id="result">0</span>원</h3>
                         <button type="button" class="btn btn-primary float-right">완료</button>
                         </div>
                       </div>
@@ -122,16 +120,18 @@
                             <button type="button" class="btn btn-primary">완료</button>
                             </div>
                           </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-4 mb-4 stretch-card transparent">
-                            <div class="card card-tale">
-                              <div class="card-body">
-                                <p class="mb-4">내역1</p>
-                                <p class="fs-30 mb-2">목록</p>
-                                <p>가격</p>
+                          <div class="row">
+                            <% Orderdatas.forEach(function(data) { %>
+                            <div class="col-md-3 mb-4 stretch-card transparent">
+                              <div class="card card-tale">
+                                <div class="card-body">
+                                  <!--<p class="mb-4"><%=data.order_list%></p>-->
+                                  <p><%=data.order_price%>원</p>
+                                  <p><%=data.order_state%></p>
+                                </div>
                               </div>
                             </div>
+                            <% }) %>
                           </div>
                         </div>
                       </div>
@@ -150,10 +150,23 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  <script>function menuclick(num) {
-    num = num+1;  
-    result = documeent.getElementById("result");
-    result.innerText = "asdf";
+  <script>function menuclick(name, num, price) {
+    //alert(name + num);
+    newnum = document.getElementById(num)
+    if(newnum == null) {
+    newmenu = document.createElement('div');
+    newmenu.innerText = name +  ' X'
+    newnum = document.createElement('span');
+    newnum.setAttribute("id", num);
+    newnum.innerText = 1;
+    newmenu.appendChild(newnum);
+    document.getElementById("list").appendChild(newmenu);
+    }
+    else {
+      newnum.innerText = parseInt(newnum.innerText) + 1;
+    }
+    result = document.getElementById("result");
+    result.innerText = parseInt(result.innerText) + price;
   } </script>
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
