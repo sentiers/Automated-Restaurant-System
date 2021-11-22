@@ -147,8 +147,8 @@
                             <td>
                               <% data.order_list.forEach(function(order) { %>
                                 <% menus.forEach(function(menu) { %>
-                                  <% if(menu._id==order.menu) name = menu.menu_name; %>
-                                  <% if(menu._id!=order.menu) name = "알수없음"; %>
+                                  <% if(menu._id.equals(order.menu)) { name = menu.menu_name; return false; } %>
+                                  <% if(!menu._id.equals(order.menu)) { name="알수없음"; return false; } %>
                                 <% }) %>
                                 (<%= name %>, <%= order.quantity %>개)
                               <% }) %>
