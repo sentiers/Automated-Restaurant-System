@@ -123,10 +123,10 @@
                         <% menu[i] = 0; %>
                       <% } %><!-- 메뉴 갯수 불러오기 -->
                       <% datas.forEach(function(data) { %>
-                        <% for(var i = 0; i<data.order_list.length; i++) { %>
+                        <% data.order_list.forEach(function(order) { %>
                           <% for(var j = 0; j<menus.length; j++) { %>
-                          <% if(data.order_list[i].menu == menus[j]._id) menu[j] += (menus[j].menu_price * order_list[i].quantity); %> 
-                        <% }} %>
+                          <% if(menus[j]._id.equals(order.menu)) menu[j] += (menus[j].menu_price * order.quantity); %> 
+                        <% }}) %>
                         <% }) %>
                         <tbody>
                           <% for(var i = 0; i<menus.length; i++) { %>
