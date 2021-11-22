@@ -41,10 +41,18 @@ function setEmployeeIn(idData) {
                         $set: {
                             employee_status: 1 // 출근으로
                         },
-                        $push:{
-                            employee_record:{
-                                record_info: "출근",
-                                record_time: getCurrentDateTime()
+                        $push: {
+                            employee_record: {
+                                $each: [{
+                                    record_info: "출근",
+                                    record_time: getCurrentDateTime().getFullYear() + "년 "
+                                        + getCurrentDateTime().getMonth() + "월 "
+                                        + getCurrentDateTime().getDate() + "일 "
+                                        + getCurrentDateTime().getHours() + "시 "
+                                        + getCurrentDateTime().getMinutes() + "분 "
+                                        + getCurrentDateTime().getSeconds() + "초 "
+                                }],
+                                $position: 0
                             }
                         }
                     }
@@ -71,10 +79,18 @@ function setEmployeeOut(idData) {
                         $set: {
                             employee_status: 0 // 퇴근으로
                         },
-                        $push:{
-                            employee_record:{
-                                record_info: "퇴근",
-                                record_time: getCurrentDateTime()
+                        $push: {
+                            employee_record: {
+                                $each: [{
+                                    record_info: "퇴근",
+                                    record_time: getCurrentDateTime().getFullYear() + "년 "
+                                        + getCurrentDateTime().getMonth() + "월 "
+                                        + getCurrentDateTime().getDate() + "일 "
+                                        + getCurrentDateTime().getHours() + "시 "
+                                        + getCurrentDateTime().getMinutes() + "분 "
+                                        + getCurrentDateTime().getSeconds() + "초 "
+                                }],
+                                $position: 0
                             }
                         }
                     }

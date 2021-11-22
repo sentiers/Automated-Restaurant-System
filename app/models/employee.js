@@ -13,7 +13,7 @@ var EmployeeSchema = new Schema({
   },
   employee_record: [{
     record_info: String, // 출근인지 퇴근인지
-    record_time: Date // 시간
+    record_time: String // 시간
   }]
 });
 

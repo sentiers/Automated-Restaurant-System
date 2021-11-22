@@ -42,101 +42,133 @@
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <%- include('sidebar.html') %>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-            <h3 class="font-weight-bold">직원조회</h3>
-            <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3
-                unread alerts!</span></h6>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="name">ID</label>
-                    <p>
-                      <%= _id %>
-                    </p>
-                  </div>
-                  <form class="forms-sample2" method="post" action="/employeepage/update/<%= _id %>">
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+              <h3 class="font-weight-bold">직원조회</h3>
+              <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span
+                  class="text-primary">3
+                  unread alerts!</span></h6>
+            </div>
+            <div class="row">
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
                     <div class="form-group">
-                      <label for="name">직원 이름</label>
-                      <input type="text" class="form-control" name="employee_name" value="<%= employee_name %>">
+                      <label for="name">ID</label>
+                      <p>
+                        <%= _id %>
+                      </p>
                     </div>
-                    <div class="form-group">
-                      <label for="position">직급</label>
-                      <input type="text" class="form-control" name="employee_position" value="<%= employee_position %>">
+                    <form class="forms-sample2" method="post" action="/employeepage/update/<%= _id %>">
+                      <div class="form-group">
+                        <label for="name">직원 이름</label>
+                        <input type="text" class="form-control" name="employee_name" value="<%= employee_name %>">
+                      </div>
+                      <div class="form-group">
+                        <label for="position">직급</label>
+                        <input type="text" class="form-control" name="employee_position"
+                          value="<%= employee_position %>">
+                      </div>
+                      <div class="form-group">
+                        <label for="contact">전화번호</label>
+                        <input type="text" class="form-control" name="employee_contact" value="<%= employee_contact %>">
+                      </div>
+                      <button type="submit" class="btn btn-primary">직원정보 수정</button>
+                    </form>
+                    <br>
+                    <div>
+                      <button class="btn btn-danger" onclick="location.href='/employeepage/remove/<%= _id %>'">직원정보
+                        삭제</button>
+                      <button class="btn btn-light" style="margin: 0;position: absolute;bottom: 5%;right: 10%;"
+                        onclick="location.href='/employeepage'">뒤로</button>
                     </div>
-                    <div class="form-group">
-                      <label for="contact">전화번호</label>
-                      <input type="text" class="form-control" name="employee_contact" value="<%= employee_contact %>">
-                    </div>
-                    <button type="submit" class="btn btn-primary">직원정보 수정</button>
-                  </form>
-                  <br>
-                  <div>
-                    <button class="btn btn-danger" onclick="location.href='/employeepage/remove/<%= _id %>'">직원정보
-                      삭제</button>
-                    <button class="btn btn-light" style="margin: 0;position: absolute;bottom: 5%;right: 10%;"
-                      onclick="location.href='/employeepage'">뒤로</button>
                   </div>
                 </div>
+              </div>
 
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>
+                              출퇴근
+                            </th>
+                            <th>
+                              시간
+                            </th>
+                          </tr>
+                        </thead>
+                        <% employee_record.forEach(function(record) { %>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <%= record.record_info %>
+                              </td>
+                              <td>
+                                <%= record.record_time %>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% }) %>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
+
             </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. Premium <a
+                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from
+                  BootstrapDash.
+                  All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
+                    class="ti-heart text-danger ml-1"></i></span>
+              </div>
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a
+                    href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+              </div>
+            </footer>
+            <!-- partial -->
           </div>
-
-
-
+          <!-- main-panel ends -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. Premium <a
-                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.
-              All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a
-                href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
+        <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+    <!-- container-scroller -->
 
-  <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="js/dataTables.select.min.js"></script>
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="js/dataTables.select.min.js"></script>
 
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/Chart.roundedBarCharts.js"></script>
-  <!-- End custom js for this page-->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script>
+    <!-- End custom js for this page-->
 </body>
 
 </html>
