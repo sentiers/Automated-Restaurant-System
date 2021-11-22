@@ -9,7 +9,7 @@ function getAllCurrentEmployee() {
         Employee.find({
             employee_status: 1
         }).then(data => {
-            resolve([200, data]);
+            resolve(data);
         }).catch((err) => {
             reject(500);
         });
@@ -66,13 +66,25 @@ router.get('/current', function (req, res, next) {
 });
 
 //==== id와 일치하는 직원 출퇴근 =============================
-router.get('/employee/:id', function (req, res, next) {
+router.post('/employee/:id', function (req, res, next) {
     getEmployeeById(req.params.id)
         .then((code) => {
             res.status(code).send(code + ": 성공");
         }).catch((errcode) => {
             res.status(errcode).send(errcode + ": 실패");
         });
+});
+
+
+//====로그인 페이지=============================
+router.get('/', function (req, res, next) {
+    getAllCurrentEmployee()
+        .then((data) => {
+            res.render('login_employee', { datas: data });
+        }).catch((errcode) => {
+            console.log("err");
+        });
+
 });
 
 
