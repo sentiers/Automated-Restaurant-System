@@ -29,27 +29,34 @@
               <div class="brand-logo">
                 <img src="../../images/logo.svg" alt="logo">
               </div>
-              <h5>현재 근무중 : 
+              <h5>현재 근무중 :
                 <% datas.forEach(function(data) { %>
                   <%= data.employee_name %>
-                <% }) %>
+                    <% }) %>
               </h5>
-              <h5 class="font-weight-light">현재 시간 : <% var d = new Date() %>
-                <%= d.getFullYear() %>년 
-                <%= ('0' + (d.getMonth()+1)).slice(-2) %>월 
-                <%= ('0' + d.getDate()).slice(-2) %>일 
-                <%= ('0' + d.getHours()).slice(-2) %>:
-                <%= ('0' + d.getMinutes()).slice(-2) %>:
-                <%= ('0' + d.getSeconds()).slice(-2) %>
-              </h5><br>
-              <form class="forms-sample3" method="post" action="/login/employee/:id" >
-                <div class="form-group">
-                  <input type="text" class="form-control" name="_id" value="ID">
-                </div>
-                <button type="submit" class="btn btn-primary mr-2">완료</button>
-                <button class="btn btn-light" style="margin: 0;"
-                  onclick="location.href='/main'">뒤로</button>
-              </form>
+              <h5 class="font-weight-light">현재 시간 : <% var d=new Date() %>
+                  <%= d.getFullYear() %>년
+                    <%= ('0' + (d.getMonth()+1)).slice(-2) %>월
+                      <%= ('0' + d.getDate()).slice(-2) %>일
+                        <%= ('0' + d.getHours()).slice(-2) %>:
+                          <%= ('0' + d.getMinutes()).slice(-2) %>:
+                            <%= ('0' + d.getSeconds()).slice(-2) %>
+              </h5>
+              <%if(typeof err !=="undefined" ){%>
+                <h5 style="color:red;">
+                  <%= err %>
+                </h5>
+                <%}else{%>
+                  <br>
+                  <%}%>
+                    <form class="forms-sample3" method="post" action="/login/out">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="_id" placeholder="ID를 입력하세요">
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2">퇴근하기</button>
+                    </form>
+                    <button class="btn btn-light" style="margin: 0;position: absolute;bottom: 12%;right: 10%;"
+                      onclick="location.href='/main'">뒤로</button>
             </div>
           </div>
         </div>

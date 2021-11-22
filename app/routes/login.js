@@ -16,14 +16,13 @@ function getAllCurrentEmployee() {
     });
 };
 
-//==== 직원 id 받아서 출퇴근 =========================
-function getEmployeeById(idData) {
+//==== 직원 id 받아서 출근 =========================
+function setEmployeeIn(idData) {
     return new Promise(function (resolve, reject) {
-        Employee.findOne({ _id: idData }).then((employee) => {
-            console.log(employee.employee_status);
+        Employee.findOne({ _id: idData._id }).then((employee) => {
             if (employee.employee_status == 0) { // 출근상태가아니면 
                 Employee.updateOne(
-                    { _id: idData },
+                    { _id: idData._id },
                     {
                         $set: {
                             employee_status: 1 // 출근으로
@@ -32,9 +31,22 @@ function getEmployeeById(idData) {
                 ).then(() => {
                     resolve(200);
                 })
-            } else if (employee.employee_status == 1) { // 출근상태면
+            } else {
+                reject("이미 출근상태입니다!") // 이미 출근상태일때
+            }
+        }).catch((err) => { // 직원을 찾을수없을때
+            reject("올바르지 않은 ID입니다!");
+        });
+    });
+};
+
+//==== 직원 id 받아서 퇴근 =========================
+function setEmployeeOut(idData) {
+    return new Promise(function (resolve, reject) {
+        Employee.findOne({ _id: idData._id }).then((employee) => {
+            if (employee.employee_status == 1) { // 출근상태면
                 Employee.updateOne(
-                    { _id: idData },
+                    { _id: idData._id },
                     {
                         $set: {
                             employee_status: 0 // 퇴근으로
@@ -44,10 +56,10 @@ function getEmployeeById(idData) {
                     resolve(200);
                 })
             } else {
-                reject(500)
+                reject("이미 퇴근상태입니다!") // 이미 퇴근일때
             }
         }).catch((err) => { // 직원을 찾을수없을때
-            reject(404);
+            reject("올바르지 않은 ID입니다!");
         });
     });
 };
@@ -55,38 +67,53 @@ function getEmployeeById(idData) {
 
 // ----------------------------------------------------------------
 
-//==== 현재 근무중인 직원들 조회 =============================
-router.get('/current', function (req, res, next) {
+
+//====출근 로그인 페이지=============================
+router.get('/in', function (req, res, next) {
     getAllCurrentEmployee()
         .then((data) => {
-            res.status(data[0]).send(data[1]);
-        }).catch((errcode) => {
-            res.status(errcode).send(errcode + ": 실패");
-        });
-});
-
-//==== id와 일치하는 직원 출퇴근 =============================
-router.post('/employee/:id', function (req, res, next) {
-    getEmployeeById(req.params.id)
-        .then((code) => {
-            res.status(code).send(code + ": 성공");
-        }).catch((errcode) => {
-            res.status(errcode).send(errcode + ": 실패");
-        });
-});
-
-
-//====로그인 페이지=============================
-router.get('/', function (req, res, next) {
-    getAllCurrentEmployee()
-        .then((data) => {
-            res.render('login_employee', { datas: data });
+            res.render('login_employee_in', { datas: data });
         }).catch((errcode) => {
             console.log("err");
         });
-
 });
 
+//====퇴근 로그인 페이지=============================
+router.get('/out', function (req, res, next) {
+    getAllCurrentEmployee()
+        .then((data) => {
+            res.render('login_employee_out', { datas: data });
+        }).catch((errcode) => {
+            console.log("err");
+        });
+});
+
+
+//==== id와 일치하는 직원 출근 =============================
+router.post('/in', function (req, res, next) {
+    setEmployeeIn(req.body)
+        .then(() => {
+            res.redirect('/main');
+        }).catch((err) => {
+            getAllCurrentEmployee()
+                .then((data) => {
+                    res.render('login_employee_in', { datas: data, err });
+                });
+        });
+});
+
+//==== id와 일치하는 직원 퇴근 =============================
+router.post('/out', function (req, res, next) {
+    setEmployeeOut(req.body)
+        .then(() => {
+            res.redirect('/main');
+        }).catch((err) => {
+            getAllCurrentEmployee()
+                .then((data) => {
+                    res.render('login_employee_out', { datas: data, err });
+                });
+        });
+});
 
 // --------------------------------------------------------
 module.exports = router;
