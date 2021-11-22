@@ -3,6 +3,20 @@ var router = require('express').Router();
 var Employee = require('../models/employee');
 // --------------------------------------------------------
 
+// 현재 날짜, 시간 반환하는 함수
+function getCurrentDateTime() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var today = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var milliseconds = date.getMilliseconds();
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+};
+
+
 //==== 현재 근무중인 직원들 가져오기=========================
 function getAllCurrentEmployee() {
     return new Promise(function (resolve, reject) {
@@ -26,6 +40,12 @@ function setEmployeeIn(idData) {
                     {
                         $set: {
                             employee_status: 1 // 출근으로
+                        },
+                        $push:{
+                            employee_record:{
+                                record_info: "출근",
+                                record_time: getCurrentDateTime()
+                            }
                         }
                     }
                 ).then(() => {
@@ -50,6 +70,12 @@ function setEmployeeOut(idData) {
                     {
                         $set: {
                             employee_status: 0 // 퇴근으로
+                        },
+                        $push:{
+                            employee_record:{
+                                record_info: "퇴근",
+                                record_time: getCurrentDateTime()
+                            }
                         }
                     }
                 ).then(() => {
