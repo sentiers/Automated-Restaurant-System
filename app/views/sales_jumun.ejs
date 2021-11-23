@@ -1,148 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>5성매장관리</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/feather/feather.css" />
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css" />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link
+      rel="stylesheet"
+      href="vendors/datatables.net-bs4/dataTables.bootstrap4.css"
+    />
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="js/select.dataTables.min.css"
+    />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/vertical-layout-light/style.css" />
+    <!-- endinject -->
+    <link rel="shortcut icon" href="images/favicon.png" />
+  </head>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>5성매장관리</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/feather/feather.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
-</head>
-
-<body>
-  <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
-    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="/"><img src="images/logo.svg" class="mr-2"
-            alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="/"><img src="images/logo-mini.svg" alt="logo" /></a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-          <span class="icon-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-          
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <%- include('navbar.html') %>
       <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-      <%- include('sidebar.html') %>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">매출관리</h3>
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('sidebar.html') %>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="row">
+                  <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">매출관리</h3>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-<!--여기부터-->
-          <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="template-demo">
-                <button type="button" class="btn btn-primary" onclick="location.href='/salespage'">통계 조회</button>
-                <button type="button" class="btn btn-secondary"onclick="location.href='/salespage/jumun'">주문 조회</button>
+            <!--여기부터-->
+            <div class="row">
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="template-demo">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="location.href='/salespage'"
+                  >
+                    통계 조회
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="location.href='/salespage/jumun'"
+                  >
+                    주문 조회
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 grid-margin">
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search by..." aria-label="Search by">
+            <div class="row">
+              <div class="col-lg-12 grid-margin">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Search by..."
+                      aria-label="Search by"
+                    />
                     <div class="input-group-append">
-                      <button class="btn btn-sm btn-primary" type="button">Search</button>
+                      <button class="btn btn-sm btn-primary" type="button">
+                        Search
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            주문 번호
-                          </th>
-                          <th>
-                            주문 메뉴
-                          </th>
-                          <th>
-                            금액
-                          </th>
-                          <th>
-                            주문 시간
-                          </th>
-                        </tr>
-                      </thead>
-                      <% datas.forEach(function(data) { %>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>주문 번호</th>
+                            <th>주문 메뉴</th>
+                            <th>금액</th>
+                            <th>주문 시간</th>
+                          </tr>
+                        </thead>
+                        <% datas.forEach(function(data) { %>
                         <tbody>
                           <tr>
+                            <td><%= data._id %><% var name; %></td>
                             <td>
-                              <%= data._id %><% var name; %>
+                              <% data.order_list.forEach(function(order) { %> <%
+                              menus.forEach(function(menu) { %> <%
+                              if(menu._id.equals(order.menu)) { name =
+                              menu.menu_name; return false; } %> <%
+                              if(!menu._id.equals(order.menu)) {
+                              name="알수없음"; return false; } %> <% }) %> (<%=
+                              name %>, <%= order.quantity %>개) <% }) %>
                             </td>
+                            <td><%= data.order_price %></td>
                             <td>
-                              <% data.order_list.forEach(function(order) { %>
-                                <% menus.forEach(function(menu) { %>
-                                  <% if(menu._id.equals(order.menu)) { name = menu.menu_name; return false; } %>
-                                  <% if(!menu._id.equals(order.menu)) { name="알수없음"; return false; } %>
-                                <% }) %>
-                                (<%= name %>, <%= order.quantity %>개)
-                              <% }) %>
-                            </td>
-                            <td>
-                              <%= data.order_price %>
-                            </td>
-                            <td>
-                              <%= data.order_time.getFullYear() %>-
-                              <%= ('0' + (data.order_time.getMonth()+1)).slice(-2) %>-
-                              <%= ('0' + data.order_time.getDate()).slice(-2) %> /
-                              <%= ('0' + data.order_time.getHours()).slice(-2) %>:
-                              <%= ('0' + data.order_time.getMinutes()).slice(-2) %>:
-                              <%= ('0' + data.order_time.getSeconds()).slice(-2) %>
+                              <%= data.order_time.getFullYear() %>- <%= ('0' +
+                              (data.order_time.getMonth()+1)).slice(-2) %>- <%=
+                              ('0' + data.order_time.getDate()).slice(-2) %> /
+                              <%= ('0' + data.order_time.getHours()).slice(-2)
+                              %>: <%= ('0' +
+                              data.order_time.getMinutes()).slice(-2) %>: <%=
+                              ('0' + data.order_time.getSeconds()).slice(-2) %>
                             </td>
                           </tr>
                         </tbody>
                         <% }) %>
-                    </table>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-
-
           </div>
-          
         </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
