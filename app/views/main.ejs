@@ -94,24 +94,18 @@
                           <div class="card-body">
                             <p class="card-title">주문등록</p>
                             <div class="row">
-                              <% var i =0; %> <%
-                              Menudatas.forEach(function(data) { %>
-                              <div
-                                class="col-md-3 mb-4 stretch-card transparent"
-                              >
-                                <div
-                                  class="card card-tale"
-                                  onclick="menuclick('<%=data.menu_name%>', <%=i%>, <%=data.menu_price%>);"
-                                >
-                                  <%i++;%>
-                                  <div class="card-body">
-                                    <p class="mb-4"><%=data.menu_name%></p>
-                                    <p><%=data.menu_img%></p>
-                                    <p><%=data.menu_price%>원</p>
+                              <% var i =0; %> <% Menudatas.forEach(function(data) { %>
+                                <div class="col-md-3 mb-4 stretch-card transparent">
+                                  <div class="card card-tale" onclick="menuclick('<%=data._id%>', '<%=data.menu_name%>', <%=i%>, <%=data.menu_price%>);">
+                                    <%i++;%>
+                                    <div class="card-body">
+                                      <p class="mb-4"><%=data.menu_name%></p>
+                                      <p><%=data.menu_img%></p>
+                                      <p><%=data.menu_price%>원</p>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <% }) %>
+                                <% }) %>
                             </div>
                           </div>
                         </div>
@@ -120,9 +114,8 @@
                             <div id="list"></div>
                             <h3>Total: <span id="result">0</span>원</h3>
                             <button
-                              type="button"
-                              class="btn btn-primary float-right"
-                            >
+                              type="button" class="btn btn-primary float-right" 
+                              onclick="createOrder(<%=i%>);">
                               완료
                             </button>
                           </div>
@@ -132,24 +125,16 @@
                         <div class="card">
                           <div class="card-body">
                             <div class="row">
-                              <div class="card-title">
-                                주문내역
-                                <button type="button" class="btn btn-secondary">
-                                  대기열
-                                </button>
-                                <button type="button" class="btn btn-primary">
-                                  완료
-                                </button>
+                              <div class="card-title">주문내역
+                              <button type="button" class="btn btn-secondary">대기열</button>
+                              <button type="button" class="btn btn-primary">완료</button>
                               </div>
                             </div>
                             <div class="row">
                               <% Orderdatas.forEach(function(data) { %>
-                              <div
-                                class="col-md-3 mb-4 stretch-card transparent"
-                              >
-                                <div class="card card-tale">
+                              <div class="col-md-3 mb-4 stretch-card transparent">
+                                <div class="card card-tale"  onclick="orderclick('<%=data._id%>', '<%=JSON.stringify(data.order_list)%>', <%=data.order_price%>);">
                                   <div class="card-body">
-                                    <!--<p class="mb-4"><%=data.order_list%></p>-->
                                     <p><%=data.order_price%>원</p>
                                     <p><%=data.order_state%></p>
                                   </div>
@@ -159,6 +144,11 @@
                             </div>
                           </div>
                         </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div id="order"></div>
+                          <button type="button" class="btn btn-primary float-right">처리</button>
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -174,25 +164,73 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <script>
-      function menuclick(name, num, price) {
-        //alert(name + num);
-        newnum = document.getElementById(num);
-        if (newnum == null) {
-          newmenu = document.createElement('div');
-          newmenu.innerText = name + ' X';
-          newnum = document.createElement('span');
-          newnum.setAttribute('id', num);
-          newnum.innerText = 1;
-          newmenu.appendChild(newnum);
-          document.getElementById('list').appendChild(newmenu);
-        } else {
-          newnum.innerText = parseInt(newnum.innerText) + 1;
-        }
-        result = document.getElementById('result');
-        result.innerText = parseInt(result.innerText) + price;
+    <script>function menuclick(id, name, num, price) {
+      //alert(name + num);
+      newnum = document.getElementById(num)
+      if(newnum == null) {
+      newmenu = document.createElement('div');
+      newmenu.innerText = name +  ' X'
+      newnum = document.createElement('span');
+      newnum.setAttribute("id", num);
+      newnum.innerText = 1;
+      newmenu.appendChild(newnum);
+      newid = document.createElement('span');
+      newid.setAttribute("id", "id" + num);
+      newid.style.display='none';
+      newid.innerText = id;
+      newmenu.appendChild(newid);
+      document.getElementById("list").appendChild(newmenu);
       }
-    </script>
+      else {
+        newnum.innerText = parseInt(newnum.innerText) + 1;
+      }
+      result = document.getElementById("result");
+      result.innerText = parseInt(result.innerText) + price;
+    }
+    function orderclick(id, orderlist, price) {
+      orderlist = JSON.parse(orderlist);
+      var list = '';
+      orderlist.forEach(function(data) {
+        list += data.menu + " X" + data.quantity + '\n';
+      })
+      document.getElementById("order").innerText = list;
+    }
+  function createOrder(num) {
+    form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/main/createOrder");
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "order_state");
+    input.setAttribute("value", 1);
+    form.appendChild(input);
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "order_price");
+    input.setAttribute("value", document.getElementById("result").innerText);
+    form.appendChild(input);
+    index = 0;
+    orderlist = [];
+    for (i=0; i<num; i++) {
+      id = document.getElementById("id"+i);
+      if(id != null) {
+        quantity = document.getElementById(i);
+        orderlist.push({"menu": id.innerText,
+                        "quantity": parseInt(quantity.innerText)});
+        index++;
+      }
+      id = null;
+    }
+    if(index != 0) {
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "order_list");
+    input.setAttribute("value", JSON.stringify(orderlist));
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    }
+  } </script>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

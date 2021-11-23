@@ -31,6 +31,7 @@ function getAllOrder() {
 };
 //==== 주문 생성하는 함수 =========================
 function createOrder(data) {
+  data.order_list = JSON.parse(data.order_list);
   return new Promise(function (resolve, reject) {
       var newOrder = new Order(data);
       newOrder.save((err) => { // 메뉴 저장
@@ -61,7 +62,7 @@ router.get('/main', function (req, res, next) {
             console.log("err");
         });
 });
-router.post('/main', function (req, res, next) {
+router.post('/main/createOrder', function (req, res, next) {
   createOrder(req.body)
       .then(() => {
           res.redirect('/main');
@@ -70,6 +71,8 @@ router.post('/main', function (req, res, next) {
       });
 });
 // --------------------------------------------------------
+
+
 module.exports = router;
 
 
