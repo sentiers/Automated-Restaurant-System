@@ -21,8 +21,8 @@ downBtn.addEventListener('click', () => {
   calcTotal(stockQuantity.value);
 });
 
-modalTriggers.forEach((modal, index) => {
-  modal.addEventListener('click', () => {
+modalTriggers.forEach((trigger, index) => {
+  trigger.addEventListener('click', () => {
     addInfo(index);
   });
 });
