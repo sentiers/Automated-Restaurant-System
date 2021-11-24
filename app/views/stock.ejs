@@ -178,7 +178,7 @@
     </div>
     <!-- container-scroller -->
 
-    <div class="hover_bkgr_friccs">
+    <div class="hover_bkgr_fricc">
       <span class="helper"></span>
       <div class="popup-window">
         <div class="popup-close-button">&times;</div>
@@ -226,27 +226,50 @@
           <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <div
-                  class="form-group"
-                  style="display: flex; align-items: center"
-                >
-                  <label for="quantity" style="width: 50px; margin-right: 5px"
-                    >수량</label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="order_quantity"
-                    value="0"
-                  />
-                </div>
+                <form
+                      class="forms-sample"
+                      method="post"
+                      action="/stockpage/order/"
+                    >
+                    <div class="form-group" style="display: none;">
+                      <label for="company">id</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="_id"
+                      />
+                    </div>
+                    <div
+                      class="form-group"
+                      style="display: flex; align-items: center"
+                    >
+                      <label for="quantity" style="width: 50px; margin-right: 5px"
+                        >수량</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control input-quantity"
+                        name="order_quantity"
+                        value="0"
+                        onkeyup="calcTotal(value)"
+                        onclick="calcTotal(value)"
+                        oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                        min="0"
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-success">발주하기</button>
+                </form>
               </div>
             </div>
           </div>
 
           <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
-              <div class="card-body"></div>
+              <div class="card-body">
+                <p>Total</p>
+                <p><span class="total-quantity">30구 * 3</span> </br> <span class="total-price"> 30000원</span></p>  
+              </div>
             </div>
           </div>
         </div>
@@ -258,7 +281,10 @@
       const popup = document.querySelector(".hover_bkgr_fricc");
       const close = document.querySelector(".popup-close-button");
       const infos = document.querySelectorAll(".stock-info");
-      console.log(infos[1]);
+      const totalCost =popup.querySelector(".total-price");
+      const quantity = popup.querySelector(".total-quantity");
+      const input = popup.querySelector(".input-quantity");
+  
       triggers.forEach((trigger, index) => {
         trigger.addEventListener("click", (e) => {
           addInfo(index);
@@ -270,8 +296,19 @@
         popup.classList.remove("show");
       });
 
+      function calcTotal(value){
+        const price = popup.querySelector(".stock-price").innerHTML;
+        const unit =  popup.querySelector(".stock-unit").innerHTML
+
+        let cost = value * price;
+        cost = String(cost).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+        totalCost.innerHTML = `${cost}원`;
+        quantity.innerHTML= `${unit} * ${value}`;
+      }
+
       function addInfo(index) {
-        console.log(item);
+        const item = infos[index];
+        input.value="0";
         popup.querySelector(".stock-name").innerHTML = item.cells[0].innerHTML;
         popup.querySelector(".stock-price").innerHTML = item.cells[2].innerHTML;
         popup.querySelector(".stock-unit").innerHTML = item.cells[3].innerHTML;
@@ -279,6 +316,9 @@
           item.cells[4].innerHTML;
         popup.querySelector(".stock-number").innerHTML =
           item.cells[5].innerHTML;
+        
+        totalCost.innerHTML = "0원" ;
+        quantity.innerHTML= popup.querySelector(".stock-unit").innerHTML + " * 0";
       }
     </script>
 
