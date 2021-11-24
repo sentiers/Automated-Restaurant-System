@@ -64,6 +64,13 @@
                     >
                       재고추가
                     </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="location.href='/stockpage/list'"
+                    >
+                      주문내역
+                    </button>
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
@@ -88,11 +95,16 @@
                         <% datas.forEach(function(data) { %>
                         <tbody>
                           <tr class="stock-info" style="text-align: center">
+                            <td style="display: none"><%=data._id %></td>
                             <td><%= data.stock_name %></td>
-                            <td><%= data.stock_quantity %></td>
-
+                            <td>
+                              <%=`${data.stock_quantity}(${data.stock_type})` %>
+                            </td>
                             <td><%= data.stock_order.order_price %></td>
-                            <td><%=data.stock_order.order_unit %></td>
+                            <td>
+                              <%=`${data.stock_order.order_unit}(${data.stock_type})`
+                              %>
+                            </td>
                             <td><%= data.stock_order.order_company%></td>
                             <td><%= data.stock_order.order_phone %></td>
                             <td>
@@ -184,7 +196,7 @@
     </div>
     <!-- container-scroller -->
 
-    <%- include('stockOrder_modal.html') %>
+    <%- include('stockOrder_modal') %>
     <script src="scripts/stockOrder_modal.js"></script>
 
     <!-- plugins:js -->

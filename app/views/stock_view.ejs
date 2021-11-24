@@ -81,12 +81,37 @@
                       </div>
                       <div class="form-group">
                         <label for="unit">단위</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="order_unit"
-                          value="<%= stock_order.order_unit %>"
-                        />
+                        <div
+                          style="
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                          "
+                        >
+                          <input
+                            style="width: 70%"
+                            type="text"
+                            class="form-control"
+                            name="order_unit"
+                            value="<%= stock_order.order_unit %>"
+                          />
+
+                          <select
+                            class="form-select"
+                            name="stock_type"
+                            style="width: 20%"
+                          >
+                            <% const options = ['구','장','kg']
+                            options.forEach((opt)=>{ %> <% if(opt===stock_type)
+                            { %>
+                            <option value="<%=stock_type%>" selected>
+                              <%=stock_type%>
+                            </option>
+                            <% } else { %>
+                            <option value="<%=opt%>"><%=opt%></option>
+                            <% } %> <% }) %>
+                          </select>
+                        </div>
                       </div>
                       <div class="form-group">
                         <label for="company">납품업체</label>

@@ -3,9 +3,9 @@ const stockQuantity = document.querySelector('.stock-quantity'); // 장바구니
 const upBtn = document.querySelector('.up-quantity'); // 스량 더하기 버튼
 const downBtn = document.querySelector('.down-quantity'); // 수량 빼기 버튼
 const infos = document.querySelectorAll('.stock-info'); // 재고 정보
-const modal = document.querySelector('#defaultModal');
-const totalCost = modal.querySelector('.total-cost');
-const totalQuantity = modal.querySelector('.total-quantity');
+const modal = document.querySelector('#defaultModal'); // modal 창
+const totalCost = document.querySelector('.total-cost'); // 총 주문 금액
+const totalQuantity = document.querySelector('.total-quantity'); // 총 주문 수량
 
 upBtn.addEventListener('click', () => {
   stockQuantity.value = parseInt(stockQuantity.value) + 1;
@@ -40,9 +40,10 @@ function calcTotal(value) {
 function addInfo(index) {
   const item = infos[index];
   stockQuantity.value = '0';
-  modal.querySelector('.stock-name').value = item.cells[0].innerHTML;
-  modal.querySelector('.order-price').value = item.cells[2].innerHTML;
-  modal.querySelector('.order-unit').value = item.cells[3].innerHTML;
+  modal.querySelector('.stock-id').value = item.cells[0].innerHTML;
+  modal.querySelector('.stock-name').value = item.cells[1].innerHTML;
+  modal.querySelector('.order-price').value = item.cells[3].innerHTML;
+  modal.querySelector('.order-unit').value = item.cells[4].innerText;
 
   totalCost.innerHTML = '0원';
   totalQuantity.innerHTML =
