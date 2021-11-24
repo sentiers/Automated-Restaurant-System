@@ -163,7 +163,7 @@ router.post('/create', function (req, res, next) {
 });
 
 //==== id와 일치하는 재고 조회 =============================
-router.get('/:id', function (req, res, next) {
+router.get('/view/:id', function (req, res, next) {
   getStockById(req.params.id)
     .then((data) => {
       res.render('stock_view', data);
@@ -211,14 +211,12 @@ router.post('/order', function (req, res, next) {
 //==== 발주 리스트 확인  =============================
 router.get('/list', function (req, res, next) {
   console.log('오기는하니?');
-  //res.render('stock_orderlist');
-  res
-    .redirect('/stockpage')
-    .then(() => {
-      console.log('성공');
+  showOrderList()
+    .then((data) => {
+      res.render('stock_orderlist', data);
     })
     .catch((err) => {
-      console.log(err);
+      res.render('stock_orderlist', err);
     });
 });
 
