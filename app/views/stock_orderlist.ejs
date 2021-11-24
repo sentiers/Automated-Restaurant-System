@@ -58,12 +58,76 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <% id(data===404) { %>
-                    <p>주문한 재고가 없습니다.</p>
-                    <% } else { %> <% } %>
+                    <% if(datas.length === 0) { %>
+                    <div>주문 내역이 없습니다.</div>
+                    <%} else { %>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr style="text-align: center">
+                            <th>재고명</th>
+                            <th>주문 수량</th>
+                            <th>결제 금액</th>
+                            <th>납품 업체</th>
+                            <th>업체 번호</th>
+                            <th>
+                              <!--stock_name: String
+                            stock_quantity: Number,
+                            order_company: String,
+                          order_price: Number
+                          order_unit: String,
+                        -->
+                            </th>
+                          </tr>
+                        </thead>
+                        <% datas.forEach(function(data) { %>
+                        <tbody>
+                          <tr class="stock-info" style="text-align: center">
+                            <td style="display: none"><%=data._id %></td>
+                            <td><%= data.stock_name %></td>
+                            <td>
+                              <span class="total"
+                                ><%=`${data.stock_order.order_unit *
+                                data.stock_order.order_quantity}`%></span
+                              >
+                              <span><%=`(${data.stock_type})`%></span>
+                              %>
+                            </td>
+                            <td>
+                              <%=`${data.stock_order.order_price *
+                              data.stock_order.order_quantity}원` %>
+                            </td>
+                            <td><%= data.stock_order.order_company%></td>
+                            <td><%= data.stock_order.order_phone %></td>
+                            <td>
+                              <button
+                                type="submit"
+                                class="btn trigger"
+                                data-toggle="modal"
+                                data-target="#defaultModal"
+                                style="background-color: #b4ace2"
+                              >
+                                구매확정
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <% }) %>
+                      </table>
+                    </div>
+                    <% } %>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="row float-sm-right mr-3">
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                onclick="location.href='/stockpage/'"
+              >
+                뒤로
+              </button>
             </div>
           </div>
           <!-- content-wrapper ends -->
@@ -122,8 +186,79 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <script src="scripts/stockOrder_modal.js"></script>
 
+    <!-- modal  -->
+    <div
+      class="modal fade"
+      id="defaultModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="info-sum">품목 : 수량</p>
+            <p>구매확정 하시겠습니까?</p>
+          </div>
+          <form
+            method="post"
+            action="/stockpage/confirm"
+            style="width: 100%; margin: 0px 10px"
+          >
+            <div class="modal-footer">
+              <input style="display: none" name="stock_id" class="stock-id" />
+              <input
+                style="display: none"
+                name="order_quantity"
+                class="order-quantity"
+              />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                취소
+              </button>
+              <button type="submit" class="btn btn-primary">확인</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- modal  -->
+
+    <script>
+      const modal = document.querySelector('#defaultModal'); // modal 창
+      const modalTriggers = document.querySelectorAll('.trigger'); // 구매확정 버튼
+      const infos = document.querySelectorAll('.stock-info'); // 재고 정보
+      const sum = document.querySelector('.info-sum');
+
+      modalTriggers.forEach((trigger, index) => {
+        trigger.addEventListener('click', () => {
+          const item = infos[index];
+          modal.querySelector('.stock-id').value = item.cells[0].innerHTML;
+          modal.querySelector('.order-quantity').value = parseInt(
+            item.cells[2].querySelector('.total').innerText
+          );
+          sum.innerHTML = `[ ${item.cells[1].innerHTML} : ${
+            item.cells[2].querySelector('.total').innerText
+          } ]`;
+        });
+      });
+    </script>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

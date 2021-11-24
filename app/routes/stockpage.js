@@ -121,15 +121,35 @@ function orderStock(data) {
 function showOrderList() {
   return new Promise(function (resolve, reject) {
     Stock.find({
-      stock_order: {
-        order_status: 1,
-      },
+      'stock_order.order_status': 1,
     })
       .then((data) => {
-        resolve(200);
+        resolve(data);
       })
       .catch((err) => {
         // 재고를 찾을수없을때
+        reject(404);
+      });
+  });
+}
+
+//==== 재고 구매 확정 =========================
+function confirmStockOrder(data) {
+  return new Promise(function (resolve, reject) {
+    Stock.updateOne(
+      { _id: data.stock_id },
+      {
+        $set: {
+          'stock_order.order_status': 0,
+          'stock_order.order_quantity': 0,
+        },
+        $inc: { stock_quantity: parseInt(data.order_quantity) },
+      }
+    )
+      .then(() => {
+        resolve(200);
+      })
+      .catch((err) => {
         reject(404);
       });
   });
@@ -209,14 +229,26 @@ router.post('/order', function (req, res, next) {
 //====  =============================
 
 //==== 발주 리스트 확인  =============================
-router.get('/list', function (req, res, next) {
-  console.log('오기는하니?');
+router.get('/history', function (req, res, next) {
   showOrderList()
     .then((data) => {
-      res.render('stock_orderlist', data);
+      res.render('stock_orderlist', { datas: data });
     })
     .catch((err) => {
       res.render('stock_orderlist', err);
+    });
+});
+
+//====  =============================
+
+//==== 구매확정  =============================
+router.post('/confirm', function (req, res, next) {
+  confirmStockOrder(req.body)
+    .then((data) => {
+      res.redirect('/stockpage/history');
+    })
+    .catch((errcode) => {
+      console.log(errcode);
     });
 });
 
