@@ -10,6 +10,7 @@
     <title>5성매장관리</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="css/popup.css" />
+    <link rel="stylesheet" href="css/custom.css" />
     <link rel="stylesheet" href="vendors/feather/feather.css" />
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css" />
@@ -30,6 +31,10 @@
     <link rel="stylesheet" href="css/vertical-layout-light/style.css" />
     <!-- endinject -->
     <link rel="shortcut icon" href="images/favicon.png" />
+    <script
+      src="https://kit.fontawesome.com/55b918ee5b.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
@@ -83,7 +88,7 @@
                         </thead>
                         <% datas.forEach(function(data) { %>
                         <tbody>
-                          <tr class="stock-info">
+                          <tr class="stock-info" style="text-align: center">
                             <td><%= data.stock_name %></td>
                             <td><%= data.stock_quantity %></td>
 
@@ -105,8 +110,10 @@
                                   margin: 0px 0px 0px 10px;
                                   background-color: #91a1dc;
                                 "
-                                type="submit"
-                                class="btn trigger_popup_fricc"
+                                type="button"
+                                class="btn trigger"
+                                data-toggle="modal"
+                                data-target="#defaultModal"
                               >
                                 발주
                               </button>
@@ -178,147 +185,192 @@
     </div>
     <!-- container-scroller -->
 
-    <div class="hover_bkgr_fricc">
-      <span class="helper"></span>
-      <div class="popup-window">
-        <div class="popup-close-button">&times;</div>
-
-        <div class="form-group" style="display: none">
-          <label for="name">id</label>
-          <input type="text" class="form-control" name="stock_name" />
-        </div>
-        <div class="row">
-          <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <div>
-                  <label for="name">재고명</label>
-                  <label class="stock-name">potato</label>
+    <div
+      class="modal fade"
+      id="defaultModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-size: 20px; font-weight: bold"
+            >
+              재고 주문
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <form
+                method="post"
+                action=""
+                style="width: 100%; margin: 0px 10px"
+              >
+                <div class="form-group" style="display: none">
+                  <label for="name">재고 id</label>
+                  <input type="text" class="form-control" name="stock_id" />
                 </div>
-                <div>
+                <div class="form-group">
+                  <label for="name">재고 이름</label>
+                  <input
+                    type="text"
+                    class="form-control stock-name"
+                    name="stock_name"
+                    readonly
+                    style="caret-color: transparent; cursor: default"
+                  />
+                </div>
+                <div class="form-group">
                   <label for="price">가격</label>
-                  <label class="stock-price">10000</label>
+                  <input
+                    type="text"
+                    class="form-control order-price"
+                    name="order_price"
+                    readonly
+                    style="caret-color: transparent; cursor: default"
+                  />
                 </div>
-                <div>
+                <div class="form-group">
                   <label for="unit">단위</label>
-                  <label class="stock-unit">1kg</label>
+                  <input
+                    type="text"
+                    class="form-control order-unit"
+                    name="order_unit"
+                    readonly
+                    style="caret-color: transparent; cursor: default"
+                  />
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <div>
-                  <label for="name">납품업체</label>
-                  <label class="stock-company">쿠팡</label>
-                </div>
-                <div>
-                  <label for="price">번호</label>
-                  <label class="stock-number">010-9999-9999</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <form
-                      class="forms-sample"
-                      method="post"
-                      action="/stockpage/order/"
+                <div class="form-group product-quantity">
+                  <label for="quantity">수량</label>
+                  <div style="display: flex; margin: 0px 20px">
+                    <button
+                      class="btn btn-outline-primary btn-sm down-quantity"
+                      type="button"
+                      style="border-radius: 50%; margin: 0px 20px 0px 10px"
+                      disabled="true"
                     >
-                    <div class="form-group" style="display: none;">
-                      <label for="company">id</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="_id"
-                      />
-                    </div>
-                    <div
-                      class="form-group"
-                      style="display: flex; align-items: center"
-                    >
-                      <label for="quantity" style="width: 50px; margin-right: 5px"
-                        >수량</label
-                      >
-                      <input
-                        type="number"
-                        class="form-control input-quantity"
-                        name="order_quantity"
-                        value="0"
-                        onkeyup="calcTotal(value)"
-                        onclick="calcTotal(value)"
-                        oninput="this.value = 
+                      <i class="fas fa-minus fa-xs"></i>
+                    </button>
+                    <input
+                      type="text"
+                      class="form-control stock-quantity"
+                      name="order_quantity"
+                      value="0"
+                      onkeyup="calcTotal(value)"
+                      onchange="calcTotal(value)"
+                      oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
-                        min="0"
-                      />
-                    </div>
-                    <button type="submit" class="btn btn-success">발주하기</button>
-                </form>
+                      min="0"
+                      style="
+                        text-align: center;
+                        font-size: 18px;
+                        border-color: transparent;
+                        background-color: transparent;
+                        background: linear-gradient(#7a7b7f, #7a7b7f) center
+                          bottom 2px / calc(100% - 10px) 1px no-repeat;
+                      "
+                    />
+                    <button
+                      class="btn btn-outline-primary btn-sm up-quantity"
+                      type="button"
+                      style="border-radius: 50%; margin: 0px 10px 0px 20px"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="row">
+              <div
+                class="form-group total"
+                style="width: 100%; margin: 10px 10px"
+              >
+                <span>Total</span>
+                <div class="total" style="text-align: center">
+                  <span class="total-quantity">100kg * 200 =</span>
+                  <span class="total-cost"> 2000000원 </span>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <p>Total</p>
-                <p><span class="total-quantity">30구 * 3</span> </br> <span class="total-price"> 30000원</span></p>  
-              </div>
-            </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              취소
+            </button>
+            <button type="button" class="btn btn-primary">주문하기</button>
           </div>
         </div>
       </div>
     </div>
-
     <script>
-      const triggers = document.querySelectorAll(".trigger_popup_fricc");
-      const popup = document.querySelector(".hover_bkgr_fricc");
-      const close = document.querySelector(".popup-close-button");
-      const infos = document.querySelectorAll(".stock-info");
-      const totalCost =popup.querySelector(".total-price");
-      const quantity = popup.querySelector(".total-quantity");
-      const input = popup.querySelector(".input-quantity");
-  
-      triggers.forEach((trigger, index) => {
-        trigger.addEventListener("click", (e) => {
+      const modalTriggers = document.querySelectorAll('.trigger'); // 재고 발주 버튼
+      const stockQuantity = document.querySelector('.stock-quantity'); // 장바구니 담을 재고 수량 인풋
+      const upBtn = document.querySelector('.up-quantity'); // 스량 더하기 버튼
+      const downBtn = document.querySelector('.down-quantity'); // 수량 빼기 버튼
+      const infos = document.querySelectorAll('.stock-info'); // 재고 정보
+      const modal = document.querySelector('#defaultModal');
+      const totalCost = modal.querySelector('.total-cost');
+      const totalQuantity = modal.querySelector('.total-quantity');
+
+      upBtn.addEventListener('click', () => {
+        stockQuantity.value = parseInt(stockQuantity.value) + 1;
+        downBtn.disabled = false;
+        calcTotal(stockQuantity.value);
+      });
+
+      downBtn.addEventListener('click', () => {
+        stockQuantity.value = parseInt(stockQuantity.value) - 1;
+        if (parseInt(stockQuantity.value) === 0) {
+          downBtn.disabled = true;
+        }
+        calcTotal(stockQuantity.value);
+      });
+
+      modalTriggers.forEach((modal, index) => {
+        modal.addEventListener('click', () => {
           addInfo(index);
-          popup.classList.add("show");
         });
       });
 
-      close.addEventListener("click", () => {
-        popup.classList.remove("show");
-      });
-
-      function calcTotal(value){
-        const price = popup.querySelector(".stock-price").innerHTML;
-        const unit =  popup.querySelector(".stock-unit").innerHTML
+      function calcTotal(value) {
+        const price = modal.querySelector('.order-price').value;
+        const unit = modal.querySelector('.order-unit').value;
 
         let cost = value * price;
-        cost = String(cost).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+        cost = String(cost).replace(/(.)(?=(\d{3})+$)/g, '$1,');
         totalCost.innerHTML = `${cost}원`;
-        quantity.innerHTML= `${unit} * ${value}`;
+        totalQuantity.innerHTML = `${unit} * ${value} = `;
       }
 
       function addInfo(index) {
         const item = infos[index];
-        input.value="0";
-        popup.querySelector(".stock-name").innerHTML = item.cells[0].innerHTML;
-        popup.querySelector(".stock-price").innerHTML = item.cells[2].innerHTML;
-        popup.querySelector(".stock-unit").innerHTML = item.cells[3].innerHTML;
-        popup.querySelector(".stock-company").innerHTML =
-          item.cells[4].innerHTML;
-        popup.querySelector(".stock-number").innerHTML =
-          item.cells[5].innerHTML;
-        
-        totalCost.innerHTML = "0원" ;
-        quantity.innerHTML= popup.querySelector(".stock-unit").innerHTML + " * 0";
+        stockQuantity.value = '0';
+        modal.querySelector('.stock-name').value = item.cells[0].innerHTML;
+        modal.querySelector('.order-price').value = item.cells[2].innerHTML;
+        modal.querySelector('.order-unit').value = item.cells[3].innerHTML;
+
+        totalCost.innerHTML = '0원';
+        totalQuantity.innerHTML =
+          modal.querySelector('.order-unit').value + ' * 0 = ';
       }
     </script>
 
