@@ -44,9 +44,10 @@ function updateStock(data, idData) {
       {
         $set: {
           stock_name: data.stock_name,
+          stock_type: data.stock_type,
           'stock_order.order_company': data.order_company,
           'stock_order.order_unit': data.order_unit,
-          'stock_order.order_price]': data.order_price,
+          'stock_order.order_price': data.order_price,
           'stock_order.order_phone': data.order_phone,
         },
       }
@@ -94,13 +95,38 @@ function removeStock(idData) {
 }
 
 //==== 재고 발주 함수 =========================
-function orderStock(idData) {
+function orderStock(data) {
   return new Promise(function (resolve, reject) {
-    Stock.findOne({
-      _id: idData,
+    Stock.updateOne(
+      { _id: data.stock_id },
+      {
+        $set: {
+          'stock_order.order_status': 1,
+          'stock_order.order_quantity': data.order_quantity,
+        },
+      }
+    )
+      .then(() => {
+        resolve(200);
+      })
+      .catch((err) => {
+        // 재고를 찾을수없을때
+        reject(404);
+      });
+  });
+}
+// ----------------------------------------------------------------
+
+//==== 재고 발주 리스트 조회 함수 =========================
+function showOrderList() {
+  return new Promise(function (resolve, reject) {
+    Stock.find({
+      stock_order: {
+        order_status: 1,
+      },
     })
       .then((data) => {
-        resolve(data);
+        resolve(200);
       })
       .catch((err) => {
         // 재고를 찾을수없을때
@@ -170,14 +196,29 @@ router.get('/remove/:id', function (req, res, next) {
 });
 
 //==== 재고 발주 =============================
-router.get('/order/:id', function (req, res, next) {
-  getStockById(req.params.id)
+router.post('/order', function (req, res, next) {
+  orderStock(req.body)
     .then((data) => {
-      res.render('stock_order', data);
-      //res.redirect('/stockpage');
+      res.redirect('/stockpage');
     })
     .catch((errcode) => {
       console.log(errcode);
+    });
+});
+
+//====  =============================
+
+//==== 발주 리스트 확인  =============================
+router.get('/list', function (req, res, next) {
+  console.log('오기는하니?');
+  //res.render('stock_orderlist');
+  res
+    .redirect('/stockpage')
+    .then(() => {
+      console.log('성공');
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 

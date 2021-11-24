@@ -1,0 +1,150 @@
+<div
+  class="modal fade"
+  id="defaultModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="exampleModalLabel"
+          style="font-size: 20px; font-weight: bold"
+        >
+          재고 주문
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form action="" style="width: 100%; margin: 0px 10px">
+            <div class="form-group">
+              <label for="name">재고 이름</label>
+              <input
+                type="text"
+                class="form-control stock-name"
+                name="stock_name"
+                readonly
+                style="caret-color: transparent; cursor: default"
+              />
+            </div>
+            <div class="form-group">
+              <label for="price">가격</label>
+              <input
+                type="text"
+                class="form-control order-price"
+                name="order_price"
+                readonly
+                style="caret-color: transparent; cursor: default"
+              />
+            </div>
+            <div class="form-group">
+              <label for="unit">단위</label>
+              <input
+                type="text"
+                class="form-control order-unit"
+                name="order_unit"
+                readonly
+                style="caret-color: transparent; cursor: default"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <form
+          method="post"
+          action="/stockpage/order"
+          style="width: 100%; margin: 0px 10px"
+        >
+          <div class="form-group product-quantity">
+            <div class="form-group" style="display: none">
+              <label for="name">재고 id</label>
+              <input
+                type="text"
+                class="form-control stock-id"
+                name="stock_id"
+              />
+            </div>
+            <label for="quantity">수량</label>
+            <div style="display: flex; margin: 0px 20px">
+              <button
+                class="btn btn-outline-primary btn-sm down-quantity"
+                type="button"
+                style="border-radius: 50%; margin: 0px 20px 0px 10px"
+                disabled="true"
+              >
+                <i class="fas fa-minus fa-xs"></i>
+              </button>
+              <input
+                type="text"
+                class="form-control stock-quantity"
+                name="order_quantity"
+                value="0"
+                onkeyup="calcTotal(value)"
+                onchange="calcTotal(value)"
+                oninput="this.value = 
+!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                min="0"
+                style="
+                  text-align: center;
+                  font-size: 18px;
+                  border-color: transparent;
+                  background-color: transparent;
+                  background: linear-gradient(#7a7b7f, #7a7b7f) center bottom
+                    2px / calc(100% - 10px) 1px no-repeat;
+                "
+              />
+              <button
+                class="btn btn-outline-primary btn-sm up-quantity"
+                type="button"
+                style="border-radius: 50%; margin: 0px 10px 0px 20px"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div
+              class="form-group total"
+              style="width: 100%; margin: 10px 10px"
+            >
+              <span>Total</span>
+              <div class="total" style="text-align: center">
+                <span class="total-quantity">100kg * 200 =</span>
+                <span class="total-cost" style="font-weight: bold">
+                  2000000원
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            style="margin-top: 20px; display: flex; justify-content: flex-end"
+          >
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              style="margin: 0px 10px"
+            >
+              취소
+            </button>
+            <button type="submit" class="btn btn-primary">주문하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
