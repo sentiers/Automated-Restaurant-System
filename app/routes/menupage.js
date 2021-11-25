@@ -17,6 +17,19 @@ function getAllMenu() {
     });
 };
 
+//==== 모든 재고가져오기 =========================
+function getAllStock() {
+    return new Promise(function (resolve, reject) {
+      Stock.find()
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(500);
+        });
+    });
+  }
+
 //==== 메뉴 생성하는 함수 =========================
 function createMenu(data) {
     return new Promise(function (resolve, reject) {
@@ -96,7 +109,12 @@ router.get('/', function (req, res, next) {
 
 //==== 메뉴 생성 =============================
 router.get('/create', function (req, res, next) {
-    res.render('menu_create');
+    getAllStock()
+        .then((data) => {
+            res.render('menu_create', { datas: data });
+        }).catch((errcode) => {
+            console.log("err");
+        });
 });
 
 router.post('/create', function (req, res, next) {
