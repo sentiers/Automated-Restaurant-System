@@ -99,6 +99,17 @@
                           value="<%= menu_info %>"
                         />
                       </div>
+                      <% menu_ingr.forEach(function(ingr) { %> 
+                      <div class="form-group">
+                        <label for="contact">재료 - <%= ingr.ingr_name %></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="ingr.ingr_quantity"
+                          value="<%= ingr.ingr_quantity %>"
+                        />
+                      </div>
+                      <% }) %>
                       <div class="form-group">
                         <label for="contact">이미지</label>
                         <input

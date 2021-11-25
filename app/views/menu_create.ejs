@@ -32,6 +32,14 @@
   </head>
 
   <body>
+    <script>
+    function addIngr(){
+      var div = document.createElement('div');
+
+      div.innerHTML = document.getElementById('ingr_form').innerHTML;
+      document.getElementById('ingr').appendChild(div);
+    }</script>
+    
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <%- include('navbar.html') %>
@@ -91,6 +99,28 @@
                           placeholder="정보"
                         />
                       </div>
+                      <div id="ingr">
+                      <div class="form-group" id="ingr_form">
+                        <label for="contact">재료</label><br>
+                        <select id="menu_ingr.ingr_name" name="menu_ingr.ingr_name">
+                          <% datas.forEach(function(data) { %>
+                          <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
+                          <% }) %>
+                      </select>
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="menu_ingr.ingr_quantity"
+                          placeholder="0"
+                        />
+                      </div>
+                      </div>
+                      <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="addIngr()">
+                      재료추가
+                      </button>
                       <div class="form-group">
                         <label for="contact">이미지</label>
                         <input

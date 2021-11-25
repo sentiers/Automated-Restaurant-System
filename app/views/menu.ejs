@@ -67,6 +67,7 @@
                             <th>가격</th>
                             <th>칼로리</th>
                             <th>정보</th>
+                            <th>재료</th>
                             <th>이미지</th>
                             <th>
                               <!--menu_name: String,
@@ -84,13 +85,16 @@
                             <td><%= data.menu_price %></td>
                             <td><%= data.menu_calorie %></td>
                             <td><%= data.menu_info %></td>
+                            <td>
+                            <% data.menu_ingr.forEach(function(ingr) { %> 
+                              (<%= ingr.ingr_name %>, <%= ingr.ingr_quantity %>개) 
+                            <% }) %></td>
                             <td><%= data.menu_img_contact %></td>
                             <td>
                               <button
                                 type="button"
                                 class="btn btn-secondary"
-                                onclick="location.href='/menupage/<%= data._id %>'"
-                              >
+                                onclick="location.href='/menupage/<%= data._id %>'">
                                 메뉴조회
                               </button>
                             </td>
