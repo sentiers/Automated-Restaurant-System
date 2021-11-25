@@ -218,6 +218,10 @@
     input.setAttribute("name", "order_state");
     input.setAttribute("value", 1);
     form.appendChild(input);
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "order_time");
+    input.setAttribute("value", new Date());
+    form.appendChild(input);
     var input = document.createElement("input");
     input.setAttribute("type", "hidden");
     input.setAttribute("name", "order_price");
