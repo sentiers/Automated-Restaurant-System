@@ -95,12 +95,13 @@
                             <p class="card-title">주문등록</p>
                             <div class="row">
                               <% var i =0; %> <% Menudatas.forEach(function(data) { %>
-                                <div class="col-md-3 mb-4 stretch-card transparent">
-                                  <div class="card card-tale" onclick="menuclick('<%=data._id%>', '<%=data.menu_name%>', <%=i%>, <%=data.menu_price%>);">
+                                <div class="col-md-4 mb-4 stretch-card transparent">
+                                  <div class="card card-tale" 
+                                  onclick="menuclick('<%=data._id%>', '<%=data.menu_name%>', <%=i%>, <%=data.menu_price%>);">
                                     <%i++;%>
                                     <div class="card-body">
                                       <p class="mb-4"><%=data.menu_name%></p>
-                                      <p><%=data.menu_img%></p>
+                                      <!--<p><%=data.menu_img%></p>-->
                                       <p><%=data.menu_price%>원</p>
                                     </div>
                                   </div>
@@ -124,30 +125,34 @@
                       <div class="col-md-5 grid-margin transparent">
                         <div class="card">
                           <div class="card-body">
-                            <div class="row">
-                              <div class="card-title">주문내역
-                              <button type="button" class="btn btn-secondary">대기열</button>
-                              <button type="button" class="btn btn-primary">완료</button>
-                              </div>
-                            </div>
+                            <p class="card-title">주문내역</p>
                             <div class="row">
                               <% Orderdatas.forEach(function(data) { %>
-                              <div class="col-md-3 mb-4 stretch-card transparent">
-                                <div class="card card-tale"  onclick="orderclick('<%=data._id%>', '<%=JSON.stringify(data.order_list)%>', <%=data.order_price%>);">
+                              <% if(data.order_state == 1) { %>
+                              <div class="col-md-12 mb-4 stretch-card transparent">
+                                <div class="card card-tale" 
+                                onclick="orderclick('<%=data._id%>', '<%=JSON.stringify(data.order_list)%>', '<%=JSON.stringify(Menudatas)%>', <%=data.order_price%>);">
                                   <div class="card-body">
-                                    <p><%=data.order_price%>원</p>
-                                    <p><%=data.order_state%></p>
+                                    <p>주문 시간: <%= ('0' +
+                                      (data.order_time.getMonth()+1)).slice(-2) %>- <%=
+                                      ('0' + data.order_time.getDate()).slice(-2) %> / <%= ('0' + data.order_time.getHours()).slice(-2)
+                                      %>: <%= ('0' +
+                                      data.order_time.getMinutes()).slice(-2) %>: <%=
+                                      ('0' + data.order_time.getSeconds()).slice(-2) %></p>
+                                    <p>가격: <%=data.order_price%>원</p>
                                   </div>
                                 </div>
                               </div>
-                              <% }) %>
+                              <% }}) %>
                             </div>
                           </div>
                         </div>
                         <div class="card">
                           <div class="card-body">
                             <div id="order"></div>
-                          <button type="button" class="btn btn-primary float-right">처리</button>
+                            <div><span id="price">0</span>원
+                            <div id="orderId" style="display:none;"></div>
+                          <button type="button" class="btn btn-primary float-right" onclick="updateOrder()">완료</button></div>
                           </div>
                       </div>
                     </div>
@@ -187,13 +192,22 @@
       result = document.getElementById("result");
       result.innerText = parseInt(result.innerText) + price;
     }
-    function orderclick(id, orderlist, price) {
+    function orderclick(id, orderlist, menudatas, price) {
       orderlist = JSON.parse(orderlist);
+      menudatas = JSON.parse(menudatas);
       var list = '';
       orderlist.forEach(function(data) {
-        list += data.menu + " X" + data.quantity + '\n';
+        if(menudatas.some(function(menudata) {
+          if(menudata._id == data.menu) {
+            list += menudata.menu_name;
+            return true;
+          }
+        }) != true) list += '알수없음';
+        list += " X" + data.quantity + '\n';
       })
+      document.getElementById("orderId").innerText = id;
       document.getElementById("order").innerText = list;
+      document.getElementById("price").innerText = price;
     }
   function createOrder(num) {
     form = document.createElement("form");
@@ -230,7 +244,21 @@
     document.body.appendChild(form);
     form.submit();
     }
-  } </script>
+  }
+  function updateOrder() {
+    id = document.getElementById("orderId").innerText;
+    form = document.createElement("form");
+    form.setAttribute("method", "post");
+    path = "/main/update/" + id
+    form.setAttribute("action", path);
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "order_state");
+    input.setAttribute("value", 2);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  }</script>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

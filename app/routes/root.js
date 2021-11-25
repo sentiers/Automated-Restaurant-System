@@ -34,12 +34,29 @@ function createOrder(data) {
   data.order_list = JSON.parse(data.order_list);
   return new Promise(function (resolve, reject) {
       var newOrder = new Order(data);
-      newOrder.save((err) => { // 메뉴 저장
+      newOrder.save((err) => { // 주문 저장
           if (err) {
               reject(500);
           } else {
               resolve(201);
           }
+      });
+  });
+};
+//==== 주문 수정하는 함수 =========================
+function updateOrder(data, idData) {
+  return new Promise(function (resolve, reject) {
+      Order.updateOne(
+          { _id: idData },
+          {
+              $set: {
+                  order_state: data.order_state
+              }
+          }
+      ).then(() => {
+          resolve(200);
+      }).catch((err) => { // 직원을 찾을수없을때
+          reject(404);
       });
   });
 };
@@ -62,8 +79,18 @@ router.get('/main', function (req, res, next) {
             console.log("err");
         });
 });
+//==== 주문 생성 =============================
 router.post('/main/createOrder', function (req, res, next) {
   createOrder(req.body)
+      .then(() => {
+          res.redirect('/main');
+      }).catch((errcode) => {
+          console.log(errcode);
+      });
+});
+//==== 주문 수정 =============================
+router.post('/main/update/:id', function (req, res, next) {
+  updateOrder(req.body, req.params.id)
       .then(() => {
           res.redirect('/main');
       }).catch((errcode) => {

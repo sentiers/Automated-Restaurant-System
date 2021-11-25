@@ -111,13 +111,11 @@
                           <tr>
                             <td><%= data._id %><% var name; %></td>
                             <td>
-                              <% data.order_list.forEach(function(order) { %> <%
-                              menus.forEach(function(menu) { %> <%
-                              if(menu._id.equals(order.menu)) { name =
-                              menu.menu_name; return false; } %> <%
-                              if(!menu._id.equals(order.menu)) {
-                              name="알수없음"; return false; } %> <% }) %> (<%=
-                              name %>, <%= order.quantity %>개) <% }) %>
+                              <% data.order_list.forEach(function(order) { %> 
+                                <% if(menus.some(function(menu) { %> 
+                                  <% if(menu._id.equals(order.menu)) { name = menu.menu_name; return true;}}) != true) name = '알수없음'; %> 
+                                (<%= name %>, <%= order.quantity %>개) 
+                              <% }) %>
                             </td>
                             <td><%= data.order_price %></td>
                             <td>
