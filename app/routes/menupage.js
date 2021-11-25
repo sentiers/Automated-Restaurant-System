@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var express = require('express');
 var Menu = require('../models/menu');
+var Stock = require('../models/stock');
 router.use(express.static('./app'));
 // --------------------------------------------------------
 
