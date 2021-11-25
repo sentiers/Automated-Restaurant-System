@@ -69,6 +69,7 @@
                       </thead>
                       <% var howmonth = 4; %>
                       <% var month_price = []; %>
+                      <% var max=0; %>
                       <% for(var i = 0; i<howmonth; i++) { month_price[i] = 0; } %>
                       <% datas.forEach(function(data) { %>
                         <% month_price[data.order_time.getMonth()-new Date().getMonth()] += data.order_price; %>
@@ -79,6 +80,7 @@
                           <td class="pl-0"><%= new Date().getFullYear() %>년 <%= new Date().getMonth() + 1 - i %>월</td>
                           <td class="text-muted"><%= month_price[i] %></td>
                         </tr>
+                        <% if(max<month_price[i]) max=month_price[i]; %>
                         <% } %>
                       </tbody>
                     </table>
@@ -97,7 +99,7 @@
                       <p class="mb-0"><%= new Date().getFullYear() %>년 <%= new Date().getMonth() + 1 - i %>월</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="progress progress-md flex-grow-1 mr-4">                            
-                          <div class="progress-bar bg-inf0" role="progressbar" style="width: <%= month_price[i]/100 %>%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-inf0" role="progressbar" style="width: <%= month_price[i]/max*100 %>%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                           <p class="mb-0"><%= month_price[i] %></p>
                       </div>

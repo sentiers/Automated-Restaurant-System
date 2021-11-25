@@ -137,7 +137,7 @@
                             <div
                               class="progress-bar bg-inf0"
                               role="progressbar"
-                              style="width: <%= total_price/100 %>%"
+                              style="width: <%= total_price/total_price*100 %>%"
                               aria-valuenow="95"
                               aria-valuemin="0"
                               aria-valuemax="100"
@@ -159,7 +159,7 @@
                             <div
                               class="progress-bar bg-info"
                               role="progressbar"
-                              style="width: <%= today_price/100 %>%"
+                              style="width: <%= today_price/total_price*100 %>%"
                               aria-valuenow="35"
                               aria-valuemin="0"
                               aria-valuemax="100"
@@ -181,7 +181,7 @@
                             <div
                               class="progress-bar bg-info"
                               role="progressbar"
-                              style="width: <%= week_price/100 %>%"
+                              style="width: <%= week_price/total_price*100 %>%"
                               aria-valuenow="48"
                               aria-valuemin="0"
                               aria-valuemax="100"
@@ -203,7 +203,7 @@
                             <div
                               class="progress-bar bg-info"
                               role="progressbar"
-                              style="width: <%= month_price/100 %>%"
+                              style="width: <%= month_price/total_price*100 %>%"
                               aria-valuenow="25"
                               aria-valuemin="0"
                               aria-valuemax="100"
