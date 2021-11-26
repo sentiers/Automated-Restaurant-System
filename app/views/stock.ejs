@@ -71,6 +71,14 @@
                     >
                       주문내역
                     </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary trigger-all"
+                      data-toggle="modal"
+                      data-target="#orderAtOnceModal"
+                    >
+                      한꺼번에
+                    </button>
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
@@ -199,9 +207,9 @@
     </div>
     <!-- container-scroller -->
 
-    <%- include('stockOrder_modal') %>
+    <%- include('stockOrder_modal') %> <%- include('stockOrderAtOnce_modal') %>
     <script src="scripts/stockOrder_modal.js"></script>
-
+    <script src="scripts/stockOrderAtOnce_modal.js"></script>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

@@ -39,16 +39,26 @@
               />
             </div>
             <div class="form-group">
-              <label for="price">가격</label>
+              <label for="price-unit">가격 / 단위</label>
               <input
                 type="text"
-                class="form-control order-price"
+                class="form-control order-price-unit"
                 name="order_price"
                 readonly
                 style="caret-color: transparent; cursor: default"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
+              <label for="unit">가격</label>
+              <input
+                type="text"
+                class="form-control order-price"
+                name="order_unit"
+                readonly
+                style="caret-color: transparent; cursor: default"
+              />
+            </div>
+            <div class="form-group" style="display: none">
               <label for="unit">단위</label>
               <input
                 type="text"
@@ -58,6 +68,7 @@
                 style="caret-color: transparent; cursor: default"
               />
             </div>
+
             <div class="form-group">
               <label for="unit">현재 수량</label>
               <input
@@ -99,14 +110,13 @@
               </button>
               <input
                 type="text"
-                class="form-control stock-quantity"
+                class="form-control"
+                id="stock-quantity"
                 name="order_quantity"
-                value="0"
-                onkeyup="calcTotal(value)"
-                onchange="calcTotal(value)"
+                onkeyup="updateTotal(this.value)"
+                onchange="updateTotal(this.value)"
                 oninput="this.value = 
 !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
-                min="0"
                 style="
                   text-align: center;
                   font-size: 18px;
