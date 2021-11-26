@@ -98,7 +98,10 @@
                             <td style="display: none"><%=data._id %></td>
                             <td><%= data.stock_name %></td>
                             <td>
-                              <%=`${data.stock_quantity}(${data.stock_type})` %>
+                              <span class="stock-quantity"
+                                ><%= data.stock_quantity %></span
+                              >
+                              <span> <%=`(${data.stock_type})` %> </span>
                             </td>
                             <td><%= data.stock_order.order_price %></td>
                             <td>
