@@ -32,14 +32,41 @@
   </head>
 
   <body>
+    <% var index=0; %>
     <script>
-    function addIngr(){
-      var div = document.createElement('div');
 
-      div.innerHTML = document.getElementById('ingr_form').innerHTML;
-      document.getElementById('ingr').appendChild(div);
+      var index=0;
+      
+    function addIngr(){
+
+      index++;
+
+      if(index==1){
+        document.getElementById("ingr_form1").style.display="block";
+      }
+      else if(index==2){
+        document.getElementById("ingr_form2").style.display="block";
+      }
+      else if(index==3){
+        document.getElementById("ingr_form3").style.display="block";
+      }
+      else if(index==4){
+        document.getElementById("ingr_form4").style.display="block";
+      }
+      else {
+        document.getElementById("ingr_error").style.display="block";
+      }
+
+      //var div = document.createElement('div');
+
+      //div.innerHTML = document.getElementById('ingr_form0').innerHTML;
+      //document.getElementById('ingr').appendChild(div);
+      //document.getElementById('ingr').innerHTML=d
+
+
     }</script>
-    
+
+
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <%- include('navbar.html') %>
@@ -100,9 +127,9 @@
                         />
                       </div>
                       <div id="ingr">
-                      <div class="form-group" id="ingr_form">
+                      <div class="form-group" id="ingr_form0">
                         <label for="contact">재료</label><br>
-                        <select id="menu_ingr.ingr_name" name="menu_ingr.ingr_name">
+                        <select id="menu_ingr[0][ingr_name]" name="menu_ingr[0][ingr_name]">
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -110,9 +137,68 @@
                       <input
                           type="text"
                           class="form-control"
-                          name="menu_ingr.ingr_quantity"
+                          name="menu_ingr[0][ingr_quantity]"
                           placeholder="0"
                         />
+                      </div>
+                      <div class="form-group" id="ingr_form1" style="display:none">
+                        <label for="contact">재료</label><br>
+                        <select id="menu_ingr[1][ingr_name]" name="menu_ingr[1][ingr_name]">
+                          <% datas.forEach(function(data) { %>
+                          <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
+                          <% }) %>
+                      </select>
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="menu_ingr[1][ingr_quantity]"
+                          placeholder="1"
+                        />
+                      </div>
+                      <div class="form-group" id="ingr_form2" style="display:none">
+                        <label for="contact">재료</label><br>
+                        <select id="menu_ingr[2][ingr_name]" name="menu_ingr[2][ingr_name]">
+                          <% datas.forEach(function(data) { %>
+                          <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
+                          <% }) %>
+                      </select>
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="menu_ingr[2][ingr_quantity]"
+                          placeholder="2"
+                        />
+                      </div>
+                      <div class="form-group" id="ingr_form3" style="display:none">
+                        <label for="contact">재료</label><br>
+                        <select id="menu_ingr[3][ingr_name]" name="menu_ingr[3][ingr_name]">
+                          <% datas.forEach(function(data) { %>
+                          <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
+                          <% }) %>
+                      </select>
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="menu_ingr[3][ingr_quantity]"
+                          placeholder="3"
+                        />
+                      </div>
+                      <div class="form-group" id="ingr_form4" style="display:none">
+                        <label for="contact">재료</label><br>
+                        <select id="menu_ingr[4][ingr_name]" name="menu_ingr[4][ingr_name]">
+                          <% datas.forEach(function(data) { %>
+                          <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
+                          <% }) %>
+                      </select>
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="menu_ingr[4][ingr_quantity]"
+                          placeholder="4"
+                        />
+                      </div>
+                      <div id="ingr_error" style="display:none">
+                        <br>재료 최대 갯수!<br>
                       </div>
                       </div>
                       <button
