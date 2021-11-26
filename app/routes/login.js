@@ -33,10 +33,10 @@ function getAllCurrentEmployee() {
 //==== 직원 id 받아서 출근 =========================
 function setEmployeeIn(idData) {
     return new Promise(function (resolve, reject) {
-        Employee.findOne({ _id: idData._id }).then((employee) => {
+        Employee.findOne({ employee_id: idData.employee_id }).then((employee) => {
             if (employee.employee_status == 0) { // 출근상태가아니면 
                 Employee.updateOne(
-                    { _id: idData._id },
+                    { employee_id: idData.employee_id },
                     {
                         $set: {
                             employee_status: 1 // 출근으로
@@ -71,10 +71,10 @@ function setEmployeeIn(idData) {
 //==== 직원 id 받아서 퇴근 =========================
 function setEmployeeOut(idData) {
     return new Promise(function (resolve, reject) {
-        Employee.findOne({ _id: idData._id }).then((employee) => {
+        Employee.findOne({ employee_id: idData.employee_id }).then((employee) => {
             if (employee.employee_status == 1) { // 출근상태면
                 Employee.updateOne(
-                    { _id: idData._id },
+                    { employee_id: idData.employee_id },
                     {
                         $set: {
                             employee_status: 0 // 퇴근으로

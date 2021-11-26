@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 // 직원 스키마
 var EmployeeSchema = new Schema({
-  // employee_id
+  employee_id: String, // 직원 id
   employee_name: String, // 이름
   employee_contact: String, // 전화번호
   employee_position: String, // 직무

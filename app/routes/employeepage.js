@@ -21,6 +21,8 @@ function getAllEmployee() {
 function createEmployee(data) {
     return new Promise(function (resolve, reject) {
         var newEmployee = new Employee(data);
+        var idString = newEmployee._id.toString();
+        newEmployee.employee_id = idString.substr(idString.length - 4);
         newEmployee.save((err) => { // 새 직원 저장
             if (err) {
                 reject(500);
@@ -31,7 +33,7 @@ function createEmployee(data) {
     });
 };
 
-//==== 직원 생성하는 함수 =========================
+//==== 직원 수정하는 함수 =========================
 function updateEmployee(data, idData) {
     return new Promise(function (resolve, reject) {
         Employee.updateOne(
