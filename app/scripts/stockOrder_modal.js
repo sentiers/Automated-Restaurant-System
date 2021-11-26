@@ -42,6 +42,7 @@ function updateTotal(value) {
 function addInfo(index) {
   const item = infos[index];
   stockQuantity.value = '0';
+  downBtn.disabled = true;
 
   modal.querySelector('.stock-id').value = item.cells[0].innerHTML;
   modal.querySelector('.stock-name').value = item.cells[1].innerHTML;
