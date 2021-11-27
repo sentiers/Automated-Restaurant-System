@@ -1,0 +1,51 @@
+.order-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.order-list .group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 2px;
+  background-color: #f5f7ff;
+}
+
+.order-list input {
+  height: 38px;
+}
+.hide {
+  display: none;
+}
+
+.info {
+  width: 200px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.opt-quantity {
+  align-items: center;
+  display: flex;
+  width: 40%;
+  height: 40px;
+  margin: 0px 10px;
+}
+
+.opt-quantity .btn {
+  padding: 5px;
+}
+
+.opt-quantity i {
+  color: #3e3e91;
+}
+
+.order-list .close {
+  margin: 0px 0px 0px 5px;
+}
