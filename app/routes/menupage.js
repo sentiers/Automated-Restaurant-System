@@ -34,6 +34,7 @@ function getAllStock() {
 //==== 메뉴 생성하는 함수 =========================
 function createMenu(data) {
     return new Promise(function (resolve, reject) {
+
         var newMenu = new Menu(data);
         newMenu.save((err) => { // 메뉴 저장
             if (err) {
@@ -45,9 +46,10 @@ function createMenu(data) {
     });
 };
 
-//==== 메뉴 생성하는 함수 =========================
+//==== 메뉴 수정하는 함수 =========================
 function updateMenu(data, idData) {
     return new Promise(function (resolve, reject) {
+        console.log(data);
         Menu.updateOne(
             { _id: idData },
             {
@@ -56,7 +58,7 @@ function updateMenu(data, idData) {
                     menu_price: data.menu_price,
                     menu_calorie: data.menu_calorie,
                     menu_info: data.menu_info,
-                    menu_img: data.menu_img
+                    menu_ingr: data.menu_ingr
                 }
             }
         ).then(() => {
