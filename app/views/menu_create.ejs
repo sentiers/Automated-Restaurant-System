@@ -129,7 +129,11 @@
                       <div id="ingr">
                       <div class="form-group" id="ingr_form0">
                         <label for="contact">재료</label><br>
-                        <select id="menu_ingr[0][ingr_name]" name="menu_ingr[0][ingr_name]">
+                        <div style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;">
+                        <select id="menu_ingr[0][ingr_name]" name="menu_ingr[0][ingr_name]" style="width: 25%">
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -139,11 +143,15 @@
                           class="form-control"
                           name="menu_ingr[0][ingr_quantity]"
                           placeholder="0"
+                          style="width: 70%"
                         />
-                      </div>
+                      </div></div>
                       <div class="form-group" id="ingr_form1" style="display:none">
-                        <label for="contact">재료</label><br>
-                        <select id="menu_ingr[1][ingr_name]" name="menu_ingr[1][ingr_name]">
+                        <div style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;">
+                        <select id="menu_ingr[1][ingr_name]" name="menu_ingr[1][ingr_name]" style="width: 25%">
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -153,11 +161,15 @@
                           class="form-control"
                           name="menu_ingr[1][ingr_quantity]"
                           placeholder="1"
+                          style="width: 70%"
                         />
-                      </div>
+                      </div></div>
                       <div class="form-group" id="ingr_form2" style="display:none">
-                        <label for="contact">재료</label><br>
-                        <select id="menu_ingr[2][ingr_name]" name="menu_ingr[2][ingr_name]">
+                        <div style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;">
+                        <select id="menu_ingr[2][ingr_name]" name="menu_ingr[2][ingr_name]" style="width: 25%">
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -167,11 +179,15 @@
                           class="form-control"
                           name="menu_ingr[2][ingr_quantity]"
                           placeholder="2"
+                          style="width: 70%"
                         />
-                      </div>
+                      </div></div>
                       <div class="form-group" id="ingr_form3" style="display:none">
-                        <label for="contact">재료</label><br>
-                        <select id="menu_ingr[3][ingr_name]" name="menu_ingr[3][ingr_name]">
+                        <div style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;">
+                        <select id="menu_ingr[3][ingr_name]" name="menu_ingr[3][ingr_name]" style="width: 25%">
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -181,11 +197,15 @@
                           class="form-control"
                           name="menu_ingr[3][ingr_quantity]"
                           placeholder="3"
+                          style="width: 70%"
                         />
-                      </div>
+                      </div></div>
                       <div class="form-group" id="ingr_form4" style="display:none">
-                        <label for="contact">재료</label><br>
-                        <select id="menu_ingr[4][ingr_name]" name="menu_ingr[4][ingr_name]">
+                        <div style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;">
+                        <select id="menu_ingr[4][ingr_name]" name="menu_ingr[4][ingr_name]" style="width: 25%"> 
                           <% datas.forEach(function(data) { %>
                           <option value="<%= data.stock_name %>"><%= data.stock_name %></option>
                           <% }) %>
@@ -195,10 +215,11 @@
                           class="form-control"
                           name="menu_ingr[4][ingr_quantity]"
                           placeholder="4"
+                          style="width: 70%"
                         />
-                      </div>
+                      </div></div>
                       <div id="ingr_error" style="display:none">
-                        <br>재료 최대 갯수!<br>
+                        재료 최대 갯수!<br>
                       </div>
                       </div>
                       <button
@@ -206,15 +227,15 @@
                       class="btn btn-primary"
                       onclick="addIngr()">
                       재료추가
-                      </button>
-                      <div class="form-group">
+                      </button><br><br>
+                      <!--<div class="form-group">
                         <label for="contact">이미지</label>
                         <input
                           type="file"
                           class="form-control"
                           name="menu_img"
                         />
-                      </div>
+                      </div>-->
                       <button type="submit" class="btn btn-primary mr-2">
                         완료
                       </button>
