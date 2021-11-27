@@ -29,11 +29,14 @@
       function addTag() {
         if (tagid < <%= index %>) {
           var div = document.getElementById("tags");
-          div.innerHTML += "<div style=\"display: flex; flex-direction: row; justify-content: space-between;\"><select name=\"menu_ingr[" + tagid + "][ingr_name]\" style=\"width: 25%\"><% datas.forEach(function(data) { %> <option value=\"<%= data.stock_name %>\"><%= data.stock_name %></option><% }) %></select><input type=\"text\" class=\"form-control\" name=\"menu_ingr[" + tagid + "][ingr_quantity]\" value=\"0\" style=\"width: 70%\" /></div>";
+          div.innerHTML += "<div id=\"ingr_form\" style=\"display: flex; flex-direction: row; justify-content: space-between;\"><select name=\"menu_ingr[" + tagid + "][ingr_name]\" style=\"width: 25%\"><% datas.forEach(function(data) { %> <option value=\"<%= data.stock_name %>\"><%= data.stock_name %></option><% }) %></select><input type=\"text\" class=\"form-control\" name=\"menu_ingr[" + tagid + "][ingr_quantity]\" value=\"0\" style=\"width: 70%\" /></div>";
           tagid++;
         }else {
           document.getElementById("ingr_error").style.display = "block";
         }
+      }
+      function deleteTag() {
+        document.getElementById("ingr_form").remove();
       }
     </script>
 
@@ -95,6 +98,9 @@
 
                           <button type="button" class="btn btn-primary" onclick="addTag()">
                             재료추가
+                          </button>
+                          <button type="button" class="btn btn-primary" onclick="deleteTag()">
+                            재료삭제
                           </button><br><br>
                           <!--<div class="form-group">
                         <label for="contact">이미지</label>
