@@ -122,9 +122,8 @@ function orderStockAtOnce(datas) {
   return new Promise(function (resolve, reject) {
     idx = 0;
     datas.order_quantity.forEach((data) => {
-      idx += 1;
       //console.log(data);
-      if (data != '0') {
+      if (data !== '0') {
         Stock.updateOne(
           { _id: datas.stock_id[idx] },
           {
@@ -142,6 +141,8 @@ function orderStockAtOnce(datas) {
             reject(404);
           });
       }
+
+      idx += 1;
     });
   });
 }
