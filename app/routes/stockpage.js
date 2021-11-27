@@ -117,6 +117,36 @@ function orderStock(data) {
 }
 // ----------------------------------------------------------------
 
+//==== 재고 한꺼번에 발주 함수 =========================
+function orderStockAtOnce(datas) {
+  return new Promise(function (resolve, reject) {
+    idx = 0;
+    datas.order_quantity.forEach((data) => {
+      idx += 1;
+      //console.log(data);
+      if (data != '0') {
+        Stock.updateOne(
+          { _id: datas.stock_id[idx] },
+          {
+            $set: {
+              'stock_order.order_status': 1,
+              'stock_order.order_quantity': data,
+            },
+          }
+        )
+          .then(() => {
+            resolve(200);
+          })
+          .catch((err) => {
+            // 재고를 찾을수없을때
+            reject(404);
+          });
+      }
+    });
+  });
+}
+// ----------------------------------------------------------------
+
 //==== 재고 발주 리스트 조회 함수 =========================
 function showOrderList() {
   return new Promise(function (resolve, reject) {
@@ -226,6 +256,19 @@ router.post('/order', function (req, res, next) {
     });
 });
 
+//====  =============================
+
+//==== 재고 한꺼번에 발주 =============================
+router.post('/order/all', function (req, res, next) {
+  console.log(req.body);
+  orderStockAtOnce(req.body)
+    .then(() => {
+      res.redirect('/stockpage');
+    })
+    .catch((errcode) => {
+      console.log(errcode);
+    });
+});
 //====  =============================
 
 //==== 발주 리스트 확인  =============================
