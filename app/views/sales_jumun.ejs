@@ -78,13 +78,14 @@
                 <div class="form-group">
                   <div class="input-group">
                     <input
+                      id="date"
                       type="text"
                       class="form-control"
                       placeholder="Search by..."
                       aria-label="Search by"
                     />
                     <div class="input-group-append">
-                      <button class="btn btn-sm btn-primary" type="button">
+                      <button class="btn btn-sm btn-primary" type="button" onclick="search('<%=JSON.stringify(datas)%>', '<%=JSON.stringify(menus)%>');">
                         Search
                       </button>
                     </div>
@@ -97,7 +98,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table">
                         <thead>
                           <tr>
                             <th>주문 번호</th>
@@ -140,5 +141,38 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function search(datas, menus) {
+        datas = JSON.parse(datas);
+        menus = JSON.parse(menus);
+        date = document.getElementById("date").value;
+        if (date.length==8) {
+          table = "<thead><tr><th>주문 번호</th><th>주문 메뉴</th><th>금액</th><th>주문 시간</th></tr></thead>";
+          datas.forEach(function (data) {
+            datadate = new Date(Date.parse(data.order_time));
+            if(date == (datadate.getFullYear()+('0' + (datadate.getMonth()+1)).slice(-2)+('0' + datadate.getDate()).slice(-2))) {
+              table += "<tbody><tr><td>"+data._id+"</td><td>";
+              data.order_list.forEach(function(order) {
+                if(menus.some(function(menu) {
+                  if(menu._id == order.menu) {
+                    name = menu.menu_name;
+                    return true;
+                  }}) != true)
+                  name = '알수없음';
+                table += "(" + name + ", " + order.quantity + "개) ";
+              })
+              table += "</td><td>" + data.order_price + "</td>";
+              table += "<td>" + datadate.getFullYear() + "- " + ('0' + (datadate.getMonth()+1)).slice(-2) +
+                "- " + ('0' + datadate.getDate()).slice(-2) + " / " +
+                ('0' + datadate.getHours()).slice(-2) + ": " + 
+                ('0' + datadate.getMinutes()).slice(-2) + ": " +
+                ('0' + datadate.getSeconds()).slice(-2) + "</td>";
+            }
+          })
+          document.getElementById("table").innerHTML = table;
+        }
+      }
+    </script>
   </body>
 </html>
