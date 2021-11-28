@@ -11,7 +11,7 @@ router.use(express.static('./app'));
 //==== 모든 주문 가져오기 =========================
 function getAllOrder() {
     return new Promise(function (resolve, reject) {
-        Order.find()
+        Order.find({order_state: 2})
             .then(data => {
                 resolve(data);
             }).catch((err) => {
@@ -55,7 +55,7 @@ router.get('/wol', function (req, res, next) {
 
 //==== 메뉴 =============================
 router.get('/menu', function (req, res, next) {
-    Order.find({}, function (err, data) {
+    Order.find({order_state: 2}, function (err, data) {
         Menu.find({}, function (err, menu) {
             res.render('sales_menu', {datas:data, menus: menu});
         });
@@ -65,7 +65,7 @@ router.get('/menu', function (req, res, next) {
 
 //====주문 =============================
 router.get('/jumun', function (req, res, next) {
-    Order.find({}, function (err, data) {
+    Order.find({order_state: 2}, function (err, data) {
         Menu.find({}, function (err, menu) {
             res.render('sales_jumun', {datas:data, menus: menu});
         });
