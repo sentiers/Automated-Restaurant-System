@@ -53,6 +53,7 @@ atOnceDown.forEach((element) => {
 
 function hide(e) {
   e.parentNode.classList.add('hide');
+  e.parentNode.querySelector('.order-quantity').value = 0;
 }
 
 function calcTotalAtOnce() {
