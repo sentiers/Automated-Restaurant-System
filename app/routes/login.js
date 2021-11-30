@@ -45,12 +45,12 @@ function setEmployeeIn(idData) {
                             employee_record: {
                                 $each: [{
                                     record_info: "출근",
-                                    record_time: getCurrentDateTime().getFullYear() + "년 "
-                                        + getCurrentDateTime().getMonth() + "월 "
-                                        + getCurrentDateTime().getDate() + "일 "
-                                        + getCurrentDateTime().getHours() + "시 "
-                                        + getCurrentDateTime().getMinutes() + "분 "
-                                        + getCurrentDateTime().getSeconds() + "초 "
+                                    record_time: new Date().getFullYear() + "년 "
+                                        + (new Date().getMonth() + 1 )+ "월 "
+                                        + new Date().getDate() + "일 "
+                                        + new Date().getHours() + "시 "
+                                        + new Date().getMinutes() + "분 "
+                                        + new Date().getSeconds() + "초 "
                                 }],
                                 $position: 0
                             }
@@ -83,12 +83,12 @@ function setEmployeeOut(idData) {
                             employee_record: {
                                 $each: [{
                                     record_info: "퇴근",
-                                    record_time: getCurrentDateTime().getFullYear() + "년 "
-                                        + getCurrentDateTime().getMonth() + "월 "
-                                        + getCurrentDateTime().getDate() + "일 "
-                                        + getCurrentDateTime().getHours() + "시 "
-                                        + getCurrentDateTime().getMinutes() + "분 "
-                                        + getCurrentDateTime().getSeconds() + "초 "
+                                    record_time: new Date().getFullYear() + "년 "
+                                    + (new Date().getMonth() + 1 )+ "월 "
+                                    + new Date().getDate() + "일 "
+                                    + new Date().getHours() + "시 "
+                                    + new Date().getMinutes() + "분 "
+                                    + new Date().getSeconds() + "초 "
                                 }],
                                 $position: 0
                             }
